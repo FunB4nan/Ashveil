@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Ashveil"
+run/main_scene="uid://cx7d3m8v1kcrx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
