@@ -11,5 +11,5 @@ const languages = ["english","русский"]
 func _ready() -> void:
 	await get_tree().create_timer(1).timeout
 	await Talo.players.identify("dev", "me")
-	Talo.events.track("New Entry", {"Level" : "0"})
+	Talo.events.track("New Entry")
 	print("success")
