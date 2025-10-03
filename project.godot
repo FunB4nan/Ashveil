@@ -21,11 +21,16 @@ AudioManager="*res://prefabs/AudioManager.tscn"
 TweenManager="*res://scripts/Autoload/TweenManager.gd"
 Global="*res://scripts/Autoload/Global.gd"
 UI="*res://prefabs/UI/ui.tscn"
+Tokebi="*res://tokebi.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/tokebi/plugin.cfg")
 
 [gui]
 
