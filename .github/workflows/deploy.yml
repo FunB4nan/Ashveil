@@ -3,8 +3,8 @@ on:
   push:     
     branches: [ main ]
 env:
-  EXPORT_NAME: "Ashveil"
-  GODOT_VERSION: "4.4"
+  EXPORT_NAME: Ashveil
+  GODOT_VERSION: 4.4
 jobs:
   export-web:
     name: Web Export
@@ -37,6 +37,6 @@ jobs:
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: web
-          ITCH_GAME: "Ashveil"
-          ITCH_USER: "FunB4nan"
+          ITCH_GAME: Ashveil
+          ITCH_USER: FunB4nan
           PACKAGE: build/web
