@@ -1,0 +1,42 @@
+name: godot-ci
+on:
+  push:     
+    branches: [ main ]
+env:
+  EXPORT_NAME: "Ashveil"
+  GODOT_VERSION: "4.4"
+jobs:
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:${GODOT_VERSION}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:     
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |           
+          mkdir -v -p build/web
+          godot -v --export "HTML5" ./build/web/index.html
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: web
+          path: build/web
+      - name: Install rsync 📚         
+        run: |           
+          apt-get update && apt-get install -y rsync
+      - name: Publish to itch.io
+        uses: manleydev/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+          CHANNEL: web
+          ITCH_GAME: <<YOUR_ITCH_GAME_NAME>>
+          ITCH_USER: <<YOUR_ITCH_USERNAME>>
+          PACKAGE: build/web
