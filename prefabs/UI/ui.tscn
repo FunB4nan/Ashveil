@@ -1,0 +1,176 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsprud7eke4hw"]
+
+[ext_resource type="Script" uid="uid://bd8c0yj7jndi" path="res://scripts/UI/ui.gd" id="1_kh8tx"]
+[ext_resource type="Shader" uid="uid://bqbapyij77dl4" path="res://shaders/crt.gdshader" id="2_daqmn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wj31q"]
+shader = ExtResource("2_daqmn")
+shader_parameter/crt_brightness = 2.0
+shader_parameter/crt_ghost = 0.0
+shader_parameter/crt_grid = 0.348
+shader_parameter/crt_white_noise = 0.0
+shader_parameter/crt_curve = 0.01
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_kh8tx")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="settings" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+focus_mode = 0
+text = "Settings"
+
+[node name="settings" type="PanelContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/settings"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/settings/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="MarginContainer/settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="music" type="HBoxContainer" parent="MarginContainer/settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/settings/MarginContainer/VBoxContainer/music"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+text = "Music"
+vertical_alignment = 2
+
+[node name="musicSlider" type="HSlider" parent="MarginContainer/settings/MarginContainer/VBoxContainer/music"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="music" type="Label" parent="MarginContainer/settings/MarginContainer/VBoxContainer/music"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 40)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="sound" type="HBoxContainer" parent="MarginContainer/settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/settings/MarginContainer/VBoxContainer/sound"]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+text = "Sounds"
+vertical_alignment = 2
+
+[node name="sfxSlider" type="HSlider" parent="MarginContainer/settings/MarginContainer/VBoxContainer/sound"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="sfx" type="Label" parent="MarginContainer/settings/MarginContainer/VBoxContainer/sound"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 40)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="language" type="HBoxContainer" parent="MarginContainer/settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/settings/MarginContainer/VBoxContainer/language"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "Language"
+
+[node name="previousLanguage" type="Button" parent="MarginContainer/settings/MarginContainer/VBoxContainer/language"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "<"
+
+[node name="languageTitle" type="Label" parent="MarginContainer/settings/MarginContainer/VBoxContainer/language"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "english"
+horizontal_alignment = 1
+
+[node name="nextLanguage" type="Button" parent="MarginContainer/settings/MarginContainer/VBoxContainer/language"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = ">"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/settings/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/settings/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+text = "CRT"
+
+[node name="crt" type="CheckBox" parent="MarginContainer/settings/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="closeSettings" type="Button" parent="MarginContainer/settings/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+focus_mode = 0
+text = "close"
+
+[node name="crt" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_wj31q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/music/musicSlider" to="." method="updateSettings"]
+[connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/sound/sfxSlider" to="." method="updateSettings"]
+[connection signal="pressed" from="MarginContainer/settings/MarginContainer/VBoxContainer/language/previousLanguage" to="." method="_on_previous_language_pressed"]
+[connection signal="pressed" from="MarginContainer/settings/MarginContainer/VBoxContainer/language/nextLanguage" to="." method="_on_next_language_pressed"]
+[connection signal="toggled" from="MarginContainer/settings/MarginContainer/VBoxContainer/HBoxContainer/crt" to="." method="updateSettings"]
+[connection signal="pressed" from="MarginContainer/settings/MarginContainer/closeSettings" to="." method="_on_close_settings_pressed"]

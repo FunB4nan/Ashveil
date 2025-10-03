@@ -15,6 +15,29 @@ run/main_scene="uid://cx7d3m8v1kcrx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+AudioManager="*res://prefabs/AudioManager.tscn"
+TweenManager="*res://scripts/Autoload/TweenManager.gd"
+Global="*res://scripts/Autoload/Global.gd"
+UI="*res://prefabs/UI/ui.tscn"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
+[gui]
+
+theme/custom="uid://c7tlunlf8g3v4"
+
+[internationalization]
+
+locale/translation_remaps={
+"res://translation.csv": PackedStringArray("res://translation.en.translation:en", "res://translation.ru.translation:ru")
+}
+locale/translations=PackedStringArray("res://translation.en.translation", "res://translation.ru.translation")
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
