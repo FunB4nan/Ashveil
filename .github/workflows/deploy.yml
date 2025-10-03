@@ -8,7 +8,7 @@ env:
 jobs:
   export-web:
     name: Web Export
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:${GODOT_VERSION}
     steps:
