@@ -43,5 +43,5 @@ jobs:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: web
           ITCH_GAME: Ashveil
-          ITCH_USER: FunB4nan
+          ITCH_USER: FunBanan
           PACKAGE: build/web
