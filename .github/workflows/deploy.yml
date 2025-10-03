@@ -37,6 +37,6 @@ jobs:
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
           CHANNEL: web
-          ITCH_GAME: <<YOUR_ITCH_GAME_NAME>>
-          ITCH_USER: <<YOUR_ITCH_USERNAME>>
+          ITCH_GAME: "Ashveil"
+          ITCH_USER: "FunB4nan"
           PACKAGE: build/web
