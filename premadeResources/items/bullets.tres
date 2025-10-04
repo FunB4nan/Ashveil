@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Item" load_steps=7 format=3 uid="uid://u2kbed02rq5n"]
+
+[ext_resource type="Script" uid="uid://bwkwakxkym3lt" path="res://scripts/Resources/itemAction.gd" id="1_0ddms"]
+[ext_resource type="Script" uid="uid://pm8v0a1oee6h" path="res://scripts/Resources/item.gd" id="2_eq88w"]
+[ext_resource type="Script" uid="uid://bayyc1eepk3mo" path="res://scripts/ItemActions/throw.gd" id="2_m3oht"]
+[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="4_m3oht"]
+
+[sub_resource type="Resource" id="Resource_7d8sx"]
+script = ExtResource("2_m3oht")
+title = "Throw"
+metadata/_custom_type_script = "uid://bayyc1eepk3mo"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d8sx"]
+atlas = ExtResource("4_m3oht")
+region = Rect2(352, 0, 32, 32)
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_eq88w")
+sprite = SubResource("AtlasTexture_7d8sx")
+title = "bullets"
+buttons = Array[ExtResource("1_0ddms")]([SubResource("Resource_7d8sx")])
+initialEffects = Array[ExtResource("1_0ddms")]([])
+amount = 1
+canStack = true
+metadata/_custom_type_script = "uid://pm8v0a1oee6h"

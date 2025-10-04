@@ -1,7 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsprud7eke4hw"]
+[gd_scene load_steps=12 format=3 uid="uid://dsprud7eke4hw"]
 
 [ext_resource type="Script" uid="uid://bd8c0yj7jndi" path="res://scripts/UI/ui.gd" id="1_kh8tx"]
 [ext_resource type="Shader" uid="uid://bqbapyij77dl4" path="res://shaders/crt.gdshader" id="2_daqmn"]
+[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="2_wj31q"]
+[ext_resource type="PackedScene" uid="uid://dtgfu0y8okygv" path="res://prefabs/UI/itemSlot.tscn" id="3_vcb6d"]
+[ext_resource type="Resource" uid="uid://b3vwmh5wv5ylh" path="res://premadeResources/weapons/pistol.tres" id="4_yqnw1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hteqg"]
+atlas = ExtResource("2_wj31q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcb6d"]
+atlas = ExtResource("2_wj31q")
+region = Rect2(256, 0, 32, 32)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wj31q"]
 shader = ExtResource("2_daqmn")
@@ -10,6 +21,33 @@ shader_parameter/crt_ghost = 0.0
 shader_parameter/crt_grid = 0.348
 shader_parameter/crt_white_noise = 0.0
 shader_parameter/crt_curve = 0.01
+
+[sub_resource type="Animation" id="Animation_wj31q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gameOverLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, -93)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("retryButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(585, 769)]
+}
 
 [sub_resource type="Animation" id="Animation_daqmn"]
 resource_name = "gameOver"
@@ -38,33 +76,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(585, 769), Vector2(585, 401)]
-}
-
-[sub_resource type="Animation" id="Animation_wj31q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("gameOverLabel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(10, -93)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("retryButton:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(585, 769)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hteqg"]
@@ -219,6 +230,35 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 focus_mode = 0
 text = "close"
+
+[node name="playerStats" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/playerStats"]
+layout_mode = 2
+
+[node name="playerIcon" type="TextureRect" parent="MarginContainer/playerStats/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hteqg")
+stretch_mode = 5
+
+[node name="hpIcon" type="TextureRect" parent="MarginContainer/playerStats/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vcb6d")
+
+[node name="hp" type="Label" parent="MarginContainer/playerStats/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "10"
+
+[node name="inventory" type="HBoxContainer" parent="MarginContainer/playerStats/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="itemSlot" parent="MarginContainer/playerStats/HBoxContainer/inventory" instance=ExtResource("3_vcb6d")]
+layout_mode = 2
+item = ExtResource("4_yqnw1")
 
 [node name="gameOverLabel" type="Label" parent="."]
 offset_left = 10.0

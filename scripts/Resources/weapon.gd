@@ -6,6 +6,3 @@ class_name Weapon
 @export var distance : int = 1
 @export var usage : int = 1
 @export var modules : Array[String] = []
-
-func _init():
-	buttons.append("shoot")

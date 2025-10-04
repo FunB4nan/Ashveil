@@ -1,9 +1,15 @@
 extends Node2D
 
+class_name Player
+
 const OFFSET = Vector2(16, 16)
 
 var isMoving = false
-var hp = 10
+var hp = 100
+
+func _ready() -> void:
+	Global.player = self
+	UI.updateUI()
 
 func _input(event: InputEvent) -> void:
 	if isMoving:
@@ -20,6 +26,7 @@ func _input(event: InputEvent) -> void:
 func move(vector : Vector2):
 	isMoving = true
 	$anim.play("moving")
+	Global.main.playerLivingObstacle.emit((global_position - OFFSET) / 32)
 	var danger = Global.main.openTile((global_position - OFFSET + vector) / 32)
 	if danger != null:
 		await TweenManager.moveTween(self, global_position + vector, 0.3)
@@ -28,9 +35,12 @@ func move(vector : Vector2):
 			return
 		else:
 			hp -= danger
+			UI.updateUI()
 			print(hp)
 			var pos = (global_position - OFFSET) / 32
 			Global.main.deleteObstacle.emit(pos)
+			if danger > 0:
+				await TweenManager.moveTween(self, global_position - vector, 0.3)
 	isMoving = false
 	print((position - OFFSET) / 32)
 

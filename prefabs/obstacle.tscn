@@ -15,3 +15,20 @@ script = ExtResource("1_exave")
 material = ExtResource("1_w8agu")
 position = Vector2(16, 16)
 texture = SubResource("AtlasTexture_flcqr")
+
+[node name="lootPanel" type="PanelContainer" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="lootPanel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="lootPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Loot"
+
+[node name="loot" type="HBoxContainer" parent="lootPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

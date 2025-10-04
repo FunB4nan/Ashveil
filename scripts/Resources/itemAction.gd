@@ -2,5 +2,7 @@ extends Resource
 
 class_name ItemAction
 
-func act():
+@export var title : String = ""
+
+func act(source):
 	print("test action")

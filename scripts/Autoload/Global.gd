@@ -6,6 +6,7 @@ const languages = ["english","русский"]
 
 var main : Main
 var camera : Camera
+var player : Player
 
 var musicValume = 100
 var sfxValume = 100

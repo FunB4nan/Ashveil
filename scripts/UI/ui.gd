@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var itemSlot = preload("res://prefabs/UI/itemSlot.tscn")
+
 var gameLoaded = false
 var languageIndex = 0
 
@@ -42,6 +44,23 @@ func updateSettings(value = 0.0):
 	%languageTitle.text = Global.languages[languageIndex]
 	%music.text = str(int(%musicSlider.value),"%")
 	%sfx.text = str(int(%sfxSlider.value),"%")
+
+func updateUI():
+	%hp.text = str(Global.player.hp)
+
+func addItem(item : Item, amount = 0):
+	for slot in %inventory.get_children():
+		if slot.item.title == item.title:
+			slot.item.amount += amount
+			slot.update()
+			return
+	var slotInst = itemSlot.instantiate()
+	slotInst.item = item
+	slotInst.item.amount = amount
+	%inventory.add_child(slotInst)
+
+func getItemCount():
+	return %inventory.get_child_count()
 
 func playAnimation(anim : String):
 	$anim.play(anim)

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Chest" load_steps=4 format=3 uid="uid://dwhnm2xpcwvbt"]
+
+[ext_resource type="Script" uid="uid://d4nn2wrunhp43" path="res://scripts/Resources/chest.gd" id="1_vjsrh"]
+[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="2_vjsrh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjsrh"]
+atlas = ExtResource("2_vjsrh")
+region = Rect2(192, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_vjsrh")
+sprite = SubResource("AtlasTexture_vjsrh")
+value = 0
+metadata/_custom_type_script = "uid://d4nn2wrunhp43"
