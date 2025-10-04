@@ -4,6 +4,8 @@ signal localeChaged
 
 const languages = ["english","русский"]
 
+var main : Main
+
 var musicValume = 100
 var sfxValume = 100
 var crtOn = true

@@ -1,12 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx7d3m8v1kcrx"]
+[gd_scene load_steps=5 format=3 uid="uid://cx7d3m8v1kcrx"]
 
 [ext_resource type="Script" uid="uid://p2cc2xpgirfu" path="res://scripts/main.gd" id="1_o5qli"]
-[ext_resource type="Script" uid="uid://bdko15wdqh004" path="res://scripts/ItemActions/testAction.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://b4h5upjfrw15s" path="res://scripts/player.gd" id="2_sugp2"]
+[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="3_jyhfs"]
 
-[sub_resource type="Resource" id="Resource_sugp2"]
-script = ExtResource("2_0wfyh")
-metadata/_custom_type_script = "uid://bdko15wdqh004"
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbgi4"]
+atlas = ExtResource("3_jyhfs")
+region = Rect2(0, 0, 33, 34)
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_o5qli")
-testAction = SubResource("Resource_sugp2")
+
+[node name="player" type="Node2D" parent="."]
+script = ExtResource("2_sugp2")
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position_smoothing_enabled = true
+
+[node name="sprite" type="Sprite2D" parent="player"]
+texture = SubResource("AtlasTexture_tbgi4")
+
+[node name="anim" type="AnimationPlayer" parent="player"]

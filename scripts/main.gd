@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var testAction : ItemAction
+class_name Main
 
 func _ready() -> void:
-	testAction.act()
+	Global.main = self
