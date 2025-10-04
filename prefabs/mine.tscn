@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cimdbjidhbvs6"]
+
+[ext_resource type="Material" uid="uid://ck28uvpbtq17x" path="res://shaders/outline.tres" id="1_w8agu"]
+[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="2_ccdsx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flcqr"]
+atlas = ExtResource("2_ccdsx")
+region = Rect2(128, 0, 32, 32)
+
+[node name="mine" type="Node2D"]
+
+[node name="sprite" type="Sprite2D" parent="."]
+material = ExtResource("1_w8agu")
+position = Vector2(16, 16)
+texture = SubResource("AtlasTexture_flcqr")

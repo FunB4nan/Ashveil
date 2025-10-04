@@ -1,5 +1,6 @@
 extends Node2D
 
+const OFFSET = Vector2(16, 16)
 var isMoving = false
 
 func _input(event: InputEvent) -> void:
@@ -16,5 +17,9 @@ func _input(event: InputEvent) -> void:
 
 func move(vector : Vector2):
 	isMoving = true
-	await TweenManager.moveTween(self, global_position + vector)
+	$anim.play("moving")
+	var danger = Global.main.openTile((global_position - OFFSET + vector) / 32)
+	if danger != null:
+		await TweenManager.moveTween(self, global_position + vector, 0.3)
 	isMoving = false
+	print((position - OFFSET) / 32)
