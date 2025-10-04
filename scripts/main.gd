@@ -24,10 +24,13 @@ var enemies = {
 	"slime" : preload("res://premadeResources/obstacles/enemies/slime.tres"),
 	"mushroom" : preload("res://premadeResources/obstacles/enemies/mushroom.tres"),
 	"worm" : preload("res://premadeResources/obstacles/enemies/worm.tres"),
-	"ball" : preload("res://premadeResources/obstacles/enemies/ball.tres")
+	"ball" : preload("res://premadeResources/obstacles/enemies/ball.tres"),
+	"mine" : preload("res://premadeResources/obstacles/mine.tres")
 }
 
 var map : Dictionary[Vector2i, int]
+var enemiesOnMap : Dictionary[Vector2i, String]
+var chests : Array[Vector2i]
 
 var inventorySize : int = 10
 
@@ -54,16 +57,11 @@ func _input(event: InputEvent) -> void:
 func openTile(pos : Vector2i):
 	if map.has(pos):
 		cellEdited.emit(pos)
-		if map[pos] == 100:
-			createMine(pos)
-		elif map[pos] == 1:
-			createEnemy("mushroom",pos)
-		elif map[pos] == 5:
-			createEnemy("slime",pos)
-		elif map[pos] == 10:
-			createEnemy("worm",pos)
-		elif map[pos] == 15:
-			createEnemy("ball",pos)
+		if enemiesOnMap.has(pos):
+			if map[pos] > 0:
+				createEnemy(enemiesOnMap[pos], pos)
+			else:
+				createChest(pos, enemies[enemiesOnMap[pos]].loot)
 		else:
 			createLabel(pos, getNeighboursSum(pos))
 		$tiles.set_cell(pos, 0, Vector2i.ZERO)
@@ -97,29 +95,25 @@ func getNeighboursSum(pos : Vector2i):
 				sum += map[Vector2i(i, j)]
 	return sum
 
-func createMine(pos : Vector2i):
-	if pos in $tiles.get_used_cells():
-		return
-	var mineInst = obstacle.instantiate()
-	mineInst.gridPos = pos
-	mineInst.info = load("res://premadeResources/obstacles/mine.tres")
-	$playground.add_child(mineInst)
-
-func createEnemy(title : String,pos : Vector2i):
+func createEnemy(title : String, pos : Vector2i):
 	if pos in $tiles.get_used_cells():
 		return
 	var enemyInst = obstacle.instantiate()
 	enemyInst.gridPos = pos
 	enemyInst.info = enemies[title].duplicate()
+	enemyInst.info.value = map[pos]
 	$playground.add_child(enemyInst)
 
 func createChest(pos : Vector2i, loot):
+	if pos in chests:
+		return
 	var chestInst = obstacle.instantiate()
 	chestInst.gridPos = pos
 	chestInst.info = load("res://premadeResources/obstacles/chest.tres")
 	chestInst.info.loot = loot
 	$playground.add_child(chestInst)
 	Global.main.map[pos] = 0
+	chests.append(pos)
 
 func createLabel(pos : Vector2i, value : int):
 	var labelInst = label.instantiate()
@@ -152,14 +146,19 @@ func generateChunk(restrictedCells : Array[Vector2]):
 		for j in range(-CHUNK_SIZE / 2,CHUNK_SIZE / 2):
 			if Vector2(i, j) in mines:
 				map[Vector2i(i, j)] = 100
+				enemiesOnMap[Vector2i(i, j)] = "mine"
 			elif Vector2(i, j) in slimes:
 				map[Vector2i(i, j)] = 5
+				enemiesOnMap[Vector2i(i, j)] = "slime"
 			elif Vector2(i, j) in mushs:
 				map[Vector2i(i, j)] = 1
+				enemiesOnMap[Vector2i(i, j)] = "mushroom"
 			elif Vector2(i, j) in worms:
 				map[Vector2i(i, j)] = 10
+				enemiesOnMap[Vector2i(i, j)] = "worm"
 			elif Vector2(i, j) in balls:
 				map[Vector2i(i, j)] = 15
+				enemiesOnMap[Vector2i(i, j)] = "ball"
 			else:
 				map[Vector2i(i, j)] = 0
 

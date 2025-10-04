@@ -44,6 +44,7 @@ func move(vector : Vector2i):
 			if danger > 0:
 				gridPos -= vector
 				await TweenManager.moveTween(self, global_position - Vector2(vector) * 32, 0.3)
+				Global.main.openTile(gridPos + vector)
 	isMoving = false
 	print((position - OFFSET) / 32)
 
