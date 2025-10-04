@@ -43,6 +43,8 @@ func updateSettings(value = 0.0):
 	%music.text = str(int(%musicSlider.value),"%")
 	%sfx.text = str(int(%sfxSlider.value),"%")
 
+func playAnimation(anim : String):
+	$anim.play(anim)
 
 func _on_previous_language_pressed() -> void:
 	if languageIndex > 0:
@@ -62,3 +64,8 @@ func _on_close_settings_pressed() -> void:
 
 func _on_settings_pressed() -> void:
 	%settings.visible = true
+
+
+func _on_retry_button_pressed() -> void:
+	get_tree().reload_current_scene()
+	$anim.play("RESET")

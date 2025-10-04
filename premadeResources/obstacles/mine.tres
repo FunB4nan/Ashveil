@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ObstacleInfo" load_steps=3 format=3 uid="uid://dqt2aarji1nie"]
+
+[ext_resource type="Script" uid="uid://2qjisnl8k1d8" path="res://scripts/Resources/obstacleInfo.gd" id="1_b2juk"]
+[ext_resource type="Texture2D" uid="uid://bnncapmfkakul" path="res://premadeResources/defaultObstacleSprite.tres" id="2_b2juk"]
+
+[resource]
+script = ExtResource("1_b2juk")
+sprite = ExtResource("2_b2juk")
+value = 100
+metadata/_custom_type_script = "uid://2qjisnl8k1d8"

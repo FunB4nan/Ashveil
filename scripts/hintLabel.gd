@@ -15,3 +15,5 @@ func updateInfo(pos : Vector2i):
 	if gridPos - pos in directions:
 		value = Global.main.getNeighboursSum(gridPos)
 	$value.text = str(value)
+	if value == 0:
+		queue_free()

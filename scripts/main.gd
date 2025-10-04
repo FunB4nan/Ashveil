@@ -3,12 +3,13 @@ extends Node2D
 class_name Main
 
 signal cellEdited
+signal deleteObstacle
 
 const START_RADIUS = 3
 const CHUNK_SIZE = 24
 const MINE_AMOUNT = 24
 
-var mine = preload("res://prefabs/mine.tscn")
+var obstacle = preload("res://prefabs/obstacle.tscn")
 var label = preload("res://prefabs/hintLabel.tscn")
 
 var map : Dictionary[Vector2i, int]
@@ -28,8 +29,8 @@ func openTile(pos : Vector2i):
 	if map.has(pos):
 		$tiles.set_cell(pos, 0, Vector2i.ZERO)
 		cellEdited.emit(pos)
-		if map[pos] == 11:
-			createMine(pos * 32)
+		if map[pos] == 100:
+			createMine(pos)
 		else:
 			createLabel(pos, getNeighboursSum(pos))
 		return map[pos]
@@ -44,9 +45,10 @@ func getNeighboursSum(pos : Vector2i):
 				sum += map[Vector2i(i, j)]
 	return sum
 
-func createMine(pos : Vector2):
-	var mineInst = mine.instantiate()
-	mineInst.position = pos
+func createMine(pos : Vector2i):
+	var mineInst = obstacle.instantiate()
+	mineInst.gridPos = pos
+	mineInst.info = load("res://premadeResources/obstacles/mine.tres")
 	add_child(mineInst)
 
 func createLabel(pos : Vector2i, value : int):
@@ -63,7 +65,7 @@ func generateChunk(restrictedCells : Array[Vector2]):
 	for i in range(-CHUNK_SIZE / 2,CHUNK_SIZE / 2):
 		for j in range(-CHUNK_SIZE / 2,CHUNK_SIZE / 2):
 			if Vector2(i, j) in mines:
-				map[Vector2i(i, j)] = 11
+				map[Vector2i(i, j)] = 100
 			else:
 				map[Vector2i(i, j)] = 0
 

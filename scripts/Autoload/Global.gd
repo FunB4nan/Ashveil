@@ -5,10 +5,11 @@ signal localeChaged
 const languages = ["english","русский"]
 
 var main : Main
+var camera : Camera
 
 var musicValume = 100
 var sfxValume = 100
-var crtOn = true
+var crtOn = false
 
 var rng = RandomNumberGenerator.new()
 

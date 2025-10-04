@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2455ttguhdni"]
+[gd_scene load_steps=10 format=3 uid="uid://b2455ttguhdni"]
 
 [ext_resource type="Script" uid="uid://b4h5upjfrw15s" path="res://scripts/player.gd" id="1_r66lb"]
 [ext_resource type="Material" uid="uid://ck28uvpbtq17x" path="res://shaders/outline.tres" id="2_1txc5"]
+[ext_resource type="Script" uid="uid://c4804rvkfinl8" path="res://scripts/camera.gd" id="2_ht1c8"]
 [ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="3_ht1c8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tbgi4"]
@@ -34,6 +35,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_sugp2"]
 resource_name = "moving"
@@ -63,19 +76,63 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_r66lb"]
+resource_name = "death"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-9, -12), Vector2(-26, 19), Vector2(-26, 105), Vector2(-21, 196), Vector2(-23, 279)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, -3.14159, -6.28319, -9.42478, -12.5664]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tbgi4"]
 _data = {
 &"RESET": SubResource("Animation_jyhfs"),
+&"death": SubResource("Animation_r66lb"),
 &"moving": SubResource("Animation_sugp2")
 }
 
 [node name="player" type="Node2D"]
 script = ExtResource("1_r66lb")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
+script = ExtResource("2_ht1c8")
+
+[node name="Timer" type="Timer" parent="camera"]
 
 [node name="sprite" type="Sprite2D" parent="."]
 material = ExtResource("2_1txc5")
@@ -86,3 +143,5 @@ offset = Vector2(0, -10.5)
 libraries = {
 &"": SubResource("AnimationLibrary_tbgi4")
 }
+
+[connection signal="timeout" from="camera/Timer" to="camera" method="_on_timer_timeout"]

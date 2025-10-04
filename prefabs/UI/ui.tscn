@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsprud7eke4hw"]
+[gd_scene load_steps=7 format=3 uid="uid://dsprud7eke4hw"]
 
 [ext_resource type="Script" uid="uid://bd8c0yj7jndi" path="res://scripts/UI/ui.gd" id="1_kh8tx"]
 [ext_resource type="Shader" uid="uid://bqbapyij77dl4" path="res://shaders/crt.gdshader" id="2_daqmn"]
@@ -10,6 +10,68 @@ shader_parameter/crt_ghost = 0.0
 shader_parameter/crt_grid = 0.348
 shader_parameter/crt_white_noise = 0.0
 shader_parameter/crt_curve = 0.01
+
+[sub_resource type="Animation" id="Animation_daqmn"]
+resource_name = "gameOver"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gameOverLabel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(10, -93), Vector2(10, 238)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("retryButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(585, 769), Vector2(585, 401)]
+}
+
+[sub_resource type="Animation" id="Animation_wj31q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("gameOverLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, -93)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("retryButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(585, 769)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hteqg"]
+_data = {
+&"RESET": SubResource("Animation_wj31q"),
+&"gameOver": SubResource("Animation_daqmn")
+}
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_kh8tx")
@@ -158,6 +220,17 @@ size_flags_vertical = 8
 focus_mode = 0
 text = "close"
 
+[node name="gameOverLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = -93.0
+offset_right = 1270.0
+offset_bottom = -29.0
+theme_override_colors/font_color = Color(0.819608, 0.266667, 0.266667, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 64
+text = "Game Over!"
+horizontal_alignment = 1
+
 [node name="crt" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_wj31q")
 anchors_preset = 15
@@ -167,6 +240,27 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="retryButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = 409.0
+offset_right = 55.0
+offset_bottom = 465.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "retry"
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hteqg")
+}
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]
 [connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/music/musicSlider" to="." method="updateSettings"]
 [connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/sound/sfxSlider" to="." method="updateSettings"]
@@ -174,3 +268,4 @@ mouse_filter = 2
 [connection signal="pressed" from="MarginContainer/settings/MarginContainer/VBoxContainer/language/nextLanguage" to="." method="_on_next_language_pressed"]
 [connection signal="toggled" from="MarginContainer/settings/MarginContainer/VBoxContainer/HBoxContainer/crt" to="." method="updateSettings"]
 [connection signal="pressed" from="MarginContainer/settings/MarginContainer/closeSettings" to="." method="_on_close_settings_pressed"]
+[connection signal="pressed" from="retryButton" to="." method="_on_retry_button_pressed"]
