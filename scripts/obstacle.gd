@@ -20,6 +20,9 @@ func _ready() -> void:
 			itemInst.amount = info.loot[item]
 			itemInst.parent = self
 			%loot.add_child(itemInst)
+	$lootPanel.position = Vector2(-$lootPanel.size.x / 2, - $lootPanel.size.y - 32)
+	$lootPanel.visible = false
+	$value.text = str(info.value)
 
 func update():
 	$sprite.texture = info.sprite

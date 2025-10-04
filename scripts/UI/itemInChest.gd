@@ -8,6 +8,7 @@ func _ready() -> void:
 	texture_normal = item.sprite
 	%Name.text = tr(item.title) 
 	%Description.text = tr(item.title + "Desc")
+	$amount.text = str(amount)
 	mouse_entered.connect(showTooltip)
 	mouse_exited.connect(hideTooltip)
 	pressed.connect(addItem)
@@ -19,6 +20,8 @@ func addItem():
 
 func showTooltip():
 	$tooltip.visible = true
+	TweenManager.scaleTween(self, Vector2(1.1, 1.1))
 
 func hideTooltip():
 	$tooltip.visible = false
+	TweenManager.scaleTween(self, Vector2.ONE)

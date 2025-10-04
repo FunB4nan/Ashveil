@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b83wdyq03s7s8"]
+
+[ext_resource type="Texture2D" uid="uid://l5l8c3r0xoch" path="res://sprites/tiles.png" id="1_1h7jc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3jye"]
+atlas = ExtResource("1_1h7jc")
+region = Rect2(1, 2, 29, 28)
+
+[node name="distancePreview" type="Sprite2D"]
+modulate = Color(0.913984, 0.847028, 0.181672, 0.498039)
+texture = SubResource("AtlasTexture_r3jye")

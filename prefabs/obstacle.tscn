@@ -28,7 +28,16 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Loot"
+horizontal_alignment = 1
 
 [node name="loot" type="HBoxContainer" parent="lootPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="value" type="Label" parent="."]
+offset_top = 15.0
+offset_right = 32.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0.819608, 0.266667, 0.266667, 1)
+text = "100"
+horizontal_alignment = 1

@@ -48,6 +48,34 @@ tracks/2/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_r66lb"]
+resource_name = "death"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-9, -12), Vector2(-26, 19), Vector2(-26, 105), Vector2(-21, 196), Vector2(-23, 279)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, -3.14159, -6.28319, -9.42478, -12.5664]
+}
+
 [sub_resource type="Animation" id="Animation_sugp2"]
 resource_name = "moving"
 length = 0.3
@@ -89,34 +117,6 @@ tracks/2/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_r66lb"]
-resource_name = "death"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(-9, -12), Vector2(-26, 19), Vector2(-26, 105), Vector2(-21, 196), Vector2(-23, 279)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("sprite:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.523599, -3.14159, -6.28319, -9.42478, -12.5664]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tbgi4"]
 _data = {
 &"RESET": SubResource("Animation_jyhfs"),
@@ -128,7 +128,8 @@ _data = {
 script = ExtResource("1_r66lb")
 
 [node name="camera" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+texture_filter = 3
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 script = ExtResource("2_ht1c8")
 

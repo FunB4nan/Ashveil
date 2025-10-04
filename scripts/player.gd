@@ -4,6 +4,7 @@ class_name Player
 
 const OFFSET = Vector2(16, 16)
 
+var gridPos : Vector2i = Vector2i.ZERO
 var isMoving = false
 var hp = 100
 
@@ -15,21 +16,22 @@ func _input(event: InputEvent) -> void:
 	if isMoving:
 		return
 	if event.is_action_pressed("ui_right"):
-		move(Vector2(32, 0))
+		move(Vector2i(1, 0))
 	elif event.is_action_pressed("ui_left"):
-		move(Vector2(-32, 0))
+		move(Vector2i(-1, 0))
 	elif event.is_action_pressed("ui_up"):
-		move(Vector2(0, -32))
+		move(Vector2i(0, -1))
 	elif event.is_action_pressed("ui_down"):
-		move(Vector2(0, 32))
+		move(Vector2i(0, 1))
 
-func move(vector : Vector2):
+func move(vector : Vector2i):
 	isMoving = true
 	$anim.play("moving")
-	Global.main.playerLivingObstacle.emit((global_position - OFFSET) / 32)
-	var danger = Global.main.openTile((global_position - OFFSET + vector) / 32)
+	Global.main.playerLivingObstacle.emit(gridPos)
+	var danger = Global.main.openTile(gridPos + vector)
+	gridPos += vector
 	if danger != null:
-		await TweenManager.moveTween(self, global_position + vector, 0.3)
+		await TweenManager.moveTween(self, global_position + Vector2(vector) * 32, 0.3)
 		if danger > hp:
 			kill()
 			return
@@ -37,10 +39,10 @@ func move(vector : Vector2):
 			hp -= danger
 			UI.updateUI()
 			print(hp)
-			var pos = (global_position - OFFSET) / 32
-			Global.main.deleteObstacle.emit(pos)
+			Global.main.deleteObstacle.emit(gridPos)
 			if danger > 0:
-				await TweenManager.moveTween(self, global_position - vector, 0.3)
+				gridPos -= vector
+				await TweenManager.moveTween(self, global_position - Vector2(vector) * 32, 0.3)
 	isMoving = false
 	print((position - OFFSET) / 32)
 

@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/FreePixel.ttf-70a071a3f0bd5674a845947f6c77434
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false

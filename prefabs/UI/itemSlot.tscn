@@ -42,8 +42,8 @@ layout_mode = 2
 
 [node name="amount" type="Label" parent="."]
 layout_mode = 0
+offset_top = 26.0
 offset_right = 40.0
-offset_bottom = 48.0
+offset_bottom = 42.0
 text = "1"
 horizontal_alignment = 2
-vertical_alignment = 2

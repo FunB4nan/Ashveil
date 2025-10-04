@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://c7tlunlf8g3v4"]
 
-[ext_resource type="FontFile" uid="uid://bk6tf3kejvhcm" path="res://fonts/More 15 Basic Rus.ttf" id="1_rs583"]
+[ext_resource type="FontFile" uid="uid://bsdvlsuipc17g" path="res://fonts/FreePixel.ttf" id="1_re4k2"]
 
 [resource]
-Button/font_sizes/font_size = 32
-Button/fonts/font = ExtResource("1_rs583")
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_re4k2")
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/constants/outline_size = 5
-Label/font_sizes/font_size = 32
-Label/fonts/font = ExtResource("1_rs583")
+Label/constants/outline_size = 4
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_re4k2")

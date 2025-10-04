@@ -16,9 +16,23 @@ func _ready() -> void:
 		buttonInst.action = button
 		%actionButtons.add_child(buttonInst)
 	pressed.connect(toggleTooltip)
+	mouse_entered.connect(onMouseEntered)
+	mouse_exited.connect(onMouseExited)
+
+func onMouseEntered():
+	TweenManager.scaleTween(self, Vector2(1.1, 1.1))
+
+func onMouseExited():
+	TweenManager.scaleTween(self, Vector2.ONE)
 
 func toggleTooltip():
 	$tooltip.visible = !$tooltip.visible
+
+func subAmount(value : int):
+	item.amount -= value
+	update()
+	if item.amount <= 0:
+		queue_free()
 
 func update():
 	$amount.text = str(item.amount)

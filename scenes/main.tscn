@@ -20,5 +20,10 @@ script = ExtResource("1_o5qli")
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_jyhfs")
 
-[node name="player" parent="." instance=ExtResource("3_sugp2")]
+[node name="playground" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="player" parent="playground" instance=ExtResource("3_sugp2")]
 position = Vector2(16, 16)
+
+[node name="distancePreview" type="Node" parent="."]

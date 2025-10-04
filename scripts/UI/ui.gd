@@ -59,6 +59,12 @@ func addItem(item : Item, amount = 0):
 	slotInst.item.amount = amount
 	%inventory.add_child(slotInst)
 
+func findItem(title : String):
+	for slot in %inventory.get_children():
+		if slot.item.title == title:
+			return slot
+	return null
+
 func getItemCount():
 	return %inventory.get_child_count()
 

@@ -1,9 +1,15 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=7 format=3 uid="uid://b3vwmh5wv5ylh"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=9 format=3 uid="uid://b3vwmh5wv5ylh"]
 
 [ext_resource type="Script" uid="uid://bwkwakxkym3lt" path="res://scripts/Resources/itemAction.gd" id="1_cth3c"]
 [ext_resource type="Script" uid="uid://crveucvkf3870" path="res://scripts/Resources/weapon.gd" id="1_ocara"]
 [ext_resource type="Script" uid="uid://bayyc1eepk3mo" path="res://scripts/ItemActions/throw.gd" id="2_r5rif"]
+[ext_resource type="Script" uid="uid://drubykjtg7xrf" path="res://scripts/ItemActions/shoot.gd" id="2_woek8"]
 [ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="3_1sjfn"]
+
+[sub_resource type="Resource" id="Resource_ffqtg"]
+script = ExtResource("2_woek8")
+title = "Shoot"
+metadata/_custom_type_script = "uid://drubykjtg7xrf"
 
 [sub_resource type="Resource" id="Resource_woek8"]
 script = ExtResource("2_r5rif")
@@ -22,7 +28,7 @@ usage = 1
 modules = Array[String]([])
 sprite = SubResource("AtlasTexture_r5rif")
 title = "pistol"
-buttons = Array[ExtResource("1_cth3c")]([SubResource("Resource_woek8")])
+buttons = Array[ExtResource("1_cth3c")]([SubResource("Resource_ffqtg"), SubResource("Resource_woek8")])
 initialEffects = Array[ExtResource("1_cth3c")]([])
 amount = 1
 canStack = true

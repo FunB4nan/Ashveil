@@ -1,0 +1,13 @@
+extends ItemAction
+
+class_name Shoot
+
+func act(source):
+	var bullets = UI.findItem("bullets")
+	if bullets == null || bullets.item.amount < source.item.usage:
+		return
+	var cell = await Global.main.chooseCellToAct(source.item.distance)
+	if Global.main.map[cell] != 0:
+		Global.main.map[cell] = Global.main.map[cell] - source.item.damage
+		Global.main.cellEdited.emit(cell)
+	bullets.subAmount(source.item.usage)
