@@ -1,3 +1,12 @@
-[gd_scene format=3 uid="uid://cx7d3m8v1kcrx"]
+[gd_scene load_steps=4 format=3 uid="uid://cx7d3m8v1kcrx"]
+
+[ext_resource type="Script" uid="uid://p2cc2xpgirfu" path="res://scripts/main.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://bdko15wdqh004" path="res://scripts/ItemActions/testAction.gd" id="2_0wfyh"]
+
+[sub_resource type="Resource" id="Resource_sugp2"]
+script = ExtResource("2_0wfyh")
+metadata/_custom_type_script = "uid://bdko15wdqh004"
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_o5qli")
+testAction = SubResource("Resource_sugp2")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://b3vwmh5wv5ylh"]
+
+[ext_resource type="Script" uid="uid://bwkwakxkym3lt" path="res://scripts/Resources/itemAction.gd" id="1_cth3c"]
+[ext_resource type="Script" uid="uid://crveucvkf3870" path="res://scripts/Resources/weapon.gd" id="1_ocara"]
+
+[resource]
+script = ExtResource("1_ocara")
+damage = 1
+distance = 1
+usage = 1
+modules = Array[String]([])
+title = "pistol"
+buttons = Array[ExtResource("1_cth3c")]([])
+initialEffects = Array[ExtResource("1_cth3c")]([])
+metadata/_custom_type_script = "uid://crveucvkf3870"
