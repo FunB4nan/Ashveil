@@ -15,6 +15,8 @@ const SLIME_AMOUNT = 10
 const WORM_AMOUNT = 8
 const BALL_AMOUNT = 3
 
+const STEPS_BETWEEN_SHIFT = 10
+
 
 var obstacle = preload("res://prefabs/obstacle.tscn")
 var label = preload("res://prefabs/hintLabel.tscn")
@@ -33,6 +35,7 @@ var enemiesOnMap : Dictionary[Vector2i, String]
 var chests : Array[Vector2i]
 
 var inventorySize : int = 10
+var dayTime = 0
 
 func _ready() -> void:
 	var restrictedCells : Array[Vector2]
@@ -44,6 +47,14 @@ func _ready() -> void:
 	for i in range(-START_RADIUS, START_RADIUS + 1):
 		for j in range(-START_RADIUS, START_RADIUS + 1):
 			openTile(Vector2(i, j))
+
+func moveDay():
+	dayTime += 1
+	if dayTime == STEPS_BETWEEN_SHIFT:
+		$anim.play("dayToNight")
+	elif dayTime == STEPS_BETWEEN_SHIFT * 2:
+		$anim.play("nightToDay")
+		dayTime = 0
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("showAllMap"):
@@ -64,7 +75,8 @@ func openTile(pos : Vector2i):
 				createChest(pos, enemies[enemiesOnMap[pos]].loot)
 		else:
 			createLabel(pos, getNeighboursSum(pos))
-		$tiles.set_cell(pos, 0, Vector2i.ZERO)
+		if !(pos in $tiles.get_used_cells()):
+			$tiles.set_cell(pos, 0, Vector2i(randi_range(0,2),0))
 		return map[pos]
 	else:
 		return null

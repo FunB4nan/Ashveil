@@ -29,8 +29,9 @@ func move(vector : Vector2i):
 	$anim.play("moving")
 	Global.main.playerLivingObstacle.emit(gridPos)
 	var danger = Global.main.openTile(gridPos + vector)
-	gridPos += vector
 	if danger != null:
+		gridPos += vector
+		Global.main.moveDay()
 		await TweenManager.moveTween(self, global_position + Vector2(vector) * 32, 0.3)
 		if danger > hp:
 			kill()

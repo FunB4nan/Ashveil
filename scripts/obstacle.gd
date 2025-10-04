@@ -24,7 +24,7 @@ func _ready() -> void:
 	$lootPanel.visible = false
 
 func update():
-	$sprite.texture = info.sprite
+	$sprite.texture.region = info.sprite.region
 	$value.visible= info.value > 0
 	$value.text = str(info.value)
 

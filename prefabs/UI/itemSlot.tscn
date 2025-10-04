@@ -1,12 +1,54 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtgfu0y8okygv"]
+[gd_scene load_steps=10 format=3 uid="uid://dtgfu0y8okygv"]
 
-[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="1_l8s6l"]
+[ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="1_ggeq2"]
 [ext_resource type="Script" uid="uid://ksyd3kfqxys" path="res://scripts/UI/itemSlot.gd" id="1_wg6il"]
 [ext_resource type="Resource" uid="uid://b3vwmh5wv5ylh" path="res://premadeResources/weapons/pistol.tres" id="3_ejntg"]
+[ext_resource type="Texture2D" uid="uid://bw584cjmarya8" path="res://sprites/concept2.png" id="4_a6an0"]
+[ext_resource type="Texture2D" uid="uid://cmxn8lhm5m5dw" path="res://sprites/concept3.png" id="5_3ycf7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejntg"]
-atlas = ExtResource("1_l8s6l")
+resource_local_to_scene = true
+atlas = ExtResource("1_ggeq2")
 region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_68u8g"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_normal:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_ggeq2"), ExtResource("4_a6an0"), ExtResource("5_3ycf7")]
+}
+
+[sub_resource type="Animation" id="Animation_qpc5m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_normal:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ggeq2")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f4ufb"]
+_data = {
+&"RESET": SubResource("Animation_qpc5m"),
+&"idle": SubResource("Animation_68u8g")
+}
 
 [node name="itemSlot" type="TextureButton"]
 custom_minimum_size = Vector2(32, 32)
@@ -55,3 +97,9 @@ offset_right = 40.0
 offset_bottom = 42.0
 text = "1"
 horizontal_alignment = 2
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_f4ufb")
+}
+autoplay = "idle"

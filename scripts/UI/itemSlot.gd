@@ -32,7 +32,7 @@ func hideTooltip():
 
 func updateTooltip():
 	$tooltip.position = Vector2(-$tooltip.size.x / 4, - $tooltip.size.y)
-	texture_normal = item.sprite
+	texture_normal.region = item.sprite.region
 	%Name.text = tr(item.title)
 	if item is Weapon:
 		%Description.text = tr("weaponStats") % [item.damage, item.distance, item.usage]
