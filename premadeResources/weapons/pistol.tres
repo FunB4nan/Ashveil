@@ -31,5 +31,5 @@ title = "pistol"
 buttons = Array[ExtResource("1_cth3c")]([SubResource("Resource_ffqtg"), SubResource("Resource_woek8")])
 initialEffects = Array[ExtResource("1_cth3c")]([])
 amount = 1
-canStack = true
+canStack = false
 metadata/_custom_type_script = "uid://crveucvkf3870"

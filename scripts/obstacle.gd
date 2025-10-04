@@ -11,8 +11,8 @@ var gridPos : Vector2i
 func _ready() -> void:
 	position = gridPos * 32
 	update()
-	Global.main.deleteObstacle.connect(delete)
 	Global.main.playerLivingObstacle.connect(doAfterLiving)
+	Global.main.cellEdited.connect(updateValue)
 	if info is Chest:
 		for item in info.loot.keys():
 			var itemInst = chestItem.instantiate()
@@ -22,10 +22,19 @@ func _ready() -> void:
 			%loot.add_child(itemInst)
 	$lootPanel.position = Vector2(-$lootPanel.size.x / 2, - $lootPanel.size.y - 32)
 	$lootPanel.visible = false
-	$value.text = str(info.value)
 
 func update():
 	$sprite.texture = info.sprite
+	$value.visible= info.value > 0
+	$value.text = str(info.value)
+
+func updateValue(pos : Vector2i):
+	if pos != gridPos:
+		return
+	info.value = Global.main.map[pos]
+	if info.value <= 0:
+		delete(gridPos)
+	update()
 
 func delete(pos : Vector2i):
 	if pos != gridPos:
@@ -33,7 +42,6 @@ func delete(pos : Vector2i):
 	if info.has_method("actBeforeDeath"):
 		await info.actBeforeDeath(self)
 	Global.main.map[gridPos] = 0
-	Global.main.cellEdited.emit(gridPos)
 	if !(info is Chest):
 		queue_free()
 

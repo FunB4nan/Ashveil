@@ -5,11 +5,8 @@ var itemButton = preload("res://prefabs/UI/itemButton.tscn")
 var amount : int = 1
 
 func _ready() -> void:
-	$tooltip.position = Vector2(-$tooltip.size.x / 2, - $tooltip.size.y - 32)
+	updateTooltip()
 	$tooltip.visible = false
-	texture_normal = item.sprite
-	%Name.text = tr(item.title) 
-	%Description.text = tr(item.title + "Desc")
 	update()
 	for button in item.buttons:
 		var buttonInst = itemButton.instantiate()
@@ -26,7 +23,21 @@ func onMouseExited():
 	TweenManager.scaleTween(self, Vector2.ONE)
 
 func toggleTooltip():
+	UI.hideAllTooltips(self)
 	$tooltip.visible = !$tooltip.visible
+	updateTooltip()
+
+func hideTooltip():
+	$tooltip.visible = false
+
+func updateTooltip():
+	$tooltip.position = Vector2(-$tooltip.size.x / 4, - $tooltip.size.y)
+	texture_normal = item.sprite
+	%Name.text = tr(item.title)
+	if item is Weapon:
+		%Description.text = tr("weaponStats") % [item.damage, item.distance, item.usage]
+	else:
+		%Description.text = tr(item.title + "Desc")
 
 func subAmount(value : int):
 	item.amount -= value

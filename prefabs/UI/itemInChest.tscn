@@ -10,10 +10,9 @@ texture_normal = ExtResource("1_qad6s")
 script = ExtResource("1_vpfhr")
 
 [node name="tooltip" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
-offset_left = -50.0
-offset_top = -101.0
+offset_top = -51.0
 offset_right = 50.0
 offset_bottom = -1.0
 
@@ -22,15 +21,17 @@ layout_mode = 2
 
 [node name="Name" type="Label" parent="tooltip/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Description" type="Label" parent="tooltip/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="amount" type="Label" parent="."]
 layout_mode = 0

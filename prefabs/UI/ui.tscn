@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsprud7eke4hw"]
+[gd_scene load_steps=11 format=3 uid="uid://dsprud7eke4hw"]
 
 [ext_resource type="Script" uid="uid://bd8c0yj7jndi" path="res://scripts/UI/ui.gd" id="1_kh8tx"]
 [ext_resource type="Shader" uid="uid://bqbapyij77dl4" path="res://shaders/crt.gdshader" id="2_daqmn"]
 [ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="2_wj31q"]
 [ext_resource type="PackedScene" uid="uid://dtgfu0y8okygv" path="res://prefabs/UI/itemSlot.tscn" id="3_vcb6d"]
-[ext_resource type="Resource" uid="uid://b3vwmh5wv5ylh" path="res://premadeResources/weapons/pistol.tres" id="4_yqnw1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hteqg"]
 atlas = ExtResource("2_wj31q")
@@ -258,7 +257,6 @@ layout_mode = 2
 
 [node name="itemSlot" parent="MarginContainer/playerStats/HBoxContainer/inventory" instance=ExtResource("3_vcb6d")]
 layout_mode = 2
-item = ExtResource("4_yqnw1")
 
 [node name="gameOverLabel" type="Label" parent="."]
 offset_left = 10.0
@@ -288,7 +286,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -55.0
 offset_top = 409.0
-offset_right = 55.0
+offset_right = 73.0
 offset_bottom = 465.0
 grow_horizontal = 2
 grow_vertical = 2

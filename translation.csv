@@ -3,3 +3,5 @@ Settings,Settings,Настройки
 Language,Language,Язык
 Music,Music,Музыка
 Sounds,Sounds,Звуки
+weaponStats,Damage: %d\nDistance: %d\nBullet usage: %d,Урон: %d\nРасстояние: %d\nРасход патронов: %d
+bulletsDesc,Consumes when you shoot,"Тратятся, когда вы стреляйте"

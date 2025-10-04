@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=9 format=3 uid="uid://nmb2f3jiicq"]
+
+[ext_resource type="Script" uid="uid://bwkwakxkym3lt" path="res://scripts/Resources/itemAction.gd" id="1_uwih1"]
+[ext_resource type="Script" uid="uid://drubykjtg7xrf" path="res://scripts/ItemActions/shoot.gd" id="2_2gtqa"]
+[ext_resource type="Script" uid="uid://crveucvkf3870" path="res://scripts/Resources/weapon.gd" id="2_7vswg"]
+[ext_resource type="Script" uid="uid://bayyc1eepk3mo" path="res://scripts/ItemActions/throw.gd" id="3_andk2"]
+[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="5_8ra8a"]
+
+[sub_resource type="Resource" id="Resource_3iwbn"]
+script = ExtResource("2_2gtqa")
+title = "Shoot"
+metadata/_custom_type_script = "uid://drubykjtg7xrf"
+
+[sub_resource type="Resource" id="Resource_1m0hn"]
+script = ExtResource("3_andk2")
+title = "Throw"
+metadata/_custom_type_script = "uid://bayyc1eepk3mo"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhlnt"]
+atlas = ExtResource("5_8ra8a")
+region = Rect2(384, 32, 32, 32)
+
+[resource]
+script = ExtResource("2_7vswg")
+damage = 4
+distance = 2
+usage = 2
+modules = Array[String]([])
+sprite = SubResource("AtlasTexture_jhlnt")
+title = "Shotgun"
+buttons = Array[ExtResource("1_uwih1")]([SubResource("Resource_3iwbn"), SubResource("Resource_1m0hn")])
+initialEffects = Array[ExtResource("1_uwih1")]([])
+amount = 1
+canStack = false
+metadata/_custom_type_script = "uid://crveucvkf3870"

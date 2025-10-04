@@ -9,6 +9,8 @@ func _ready() -> void:
 	%Name.text = tr(item.title) 
 	%Description.text = tr(item.title + "Desc")
 	$amount.text = str(amount)
+	$tooltip.position = Vector2(-$tooltip.size.x / 4, - $tooltip.size.y - 32)
+	$tooltip.visible = false
 	mouse_entered.connect(showTooltip)
 	mouse_exited.connect(hideTooltip)
 	pressed.connect(addItem)

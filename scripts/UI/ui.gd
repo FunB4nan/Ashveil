@@ -48,6 +48,11 @@ func updateSettings(value = 0.0):
 func updateUI():
 	%hp.text = str(Global.player.hp)
 
+func hideAllTooltips(source):
+	for slot in %inventory.get_children():
+		if slot != source:
+			slot.hideTooltip()
+
 func addItem(item : Item, amount = 0):
 	for slot in %inventory.get_children():
 		if slot.item.title == item.title:
@@ -94,3 +99,7 @@ func _on_settings_pressed() -> void:
 func _on_retry_button_pressed() -> void:
 	get_tree().reload_current_scene()
 	$anim.play("RESET")
+	for item in %inventory.get_children():
+		item.queue_free()
+	await get_tree().create_timer(0.1).timeout
+	addItem(load("res://premadeResources/weapons/pistol.tres"), 1)

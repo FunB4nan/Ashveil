@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=7 format=3 uid="uid://765oslooud2i"]
+
+[ext_resource type="Script" uid="uid://pm8v0a1oee6h" path="res://scripts/Resources/item.gd" id="1_dqk6o"]
+[ext_resource type="Resource" uid="uid://u2kbed02rq5n" path="res://premadeResources/items/bullets.tres" id="2_hut3e"]
+[ext_resource type="Script" uid="uid://cc14oiwxat4rv" path="res://scripts/Resources/enemy.gd" id="2_rjiur"]
+[ext_resource type="Resource" uid="uid://bxninlqnmhptr" path="res://premadeResources/weapons/uzi.tres" id="3_euqcs"]
+[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="5_rttq1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd6uy"]
+atlas = ExtResource("5_rttq1")
+region = Rect2(480, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_rjiur")
+loot = Dictionary[ExtResource("1_dqk6o"), int]({
+ExtResource("2_hut3e"): 10,
+ExtResource("3_euqcs"): 1
+})
+createdChest = false
+sprite = SubResource("AtlasTexture_kd6uy")
+value = 15
+metadata/_custom_type_script = "uid://cc14oiwxat4rv"

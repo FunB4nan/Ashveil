@@ -6,7 +6,7 @@ const OFFSET = Vector2(16, 16)
 
 var gridPos : Vector2i = Vector2i.ZERO
 var isMoving = false
-var hp = 100
+var hp = 20
 
 func _ready() -> void:
 	Global.player = self
@@ -37,9 +37,10 @@ func move(vector : Vector2i):
 			return
 		else:
 			hp -= danger
+			Global.main.map[gridPos] -= danger
+			Global.main.cellEdited.emit(gridPos)
 			UI.updateUI()
 			print(hp)
-			Global.main.deleteObstacle.emit(gridPos)
 			if danger > 0:
 				gridPos -= vector
 				await TweenManager.moveTween(self, global_position - Vector2(vector) * 32, 0.3)

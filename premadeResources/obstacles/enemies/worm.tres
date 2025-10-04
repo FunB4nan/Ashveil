@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=6 format=3 uid="uid://cia400b66vtb3"]
+
+[ext_resource type="Script" uid="uid://pm8v0a1oee6h" path="res://scripts/Resources/item.gd" id="1_lepad"]
+[ext_resource type="Resource" uid="uid://nmb2f3jiicq" path="res://premadeResources/weapons/shotgun.tres" id="2_07ram"]
+[ext_resource type="Script" uid="uid://cc14oiwxat4rv" path="res://scripts/Resources/enemy.gd" id="2_wa3a3"]
+[ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="4_rb44l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtnss"]
+atlas = ExtResource("4_rb44l")
+region = Rect2(512, 0, 32, 32)
+
+[resource]
+script = ExtResource("2_wa3a3")
+loot = Dictionary[ExtResource("1_lepad"), int]({
+ExtResource("2_07ram"): 1
+})
+createdChest = false
+sprite = SubResource("AtlasTexture_gtnss")
+value = 10
+metadata/_custom_type_script = "uid://cc14oiwxat4rv"
