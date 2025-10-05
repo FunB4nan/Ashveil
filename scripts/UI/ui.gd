@@ -2,6 +2,7 @@ extends CanvasLayer
 
 var itemSlot = preload("res://prefabs/UI/itemSlot.tscn")
 var damageLabel = preload("res://prefabs/UI/damageLabel.tscn")
+var messageLabel = preload("res://prefabs/UI/messageLabel.tscn")
 
 var gameLoaded = false
 var languageIndex = 0
@@ -99,6 +100,15 @@ func findItem(title : String):
 
 func getItemCount():
 	return %inventory.get_child_count()
+
+func showMessage(line : String):
+	var labelInst = messageLabel.instantiate()
+	labelInst.line = line
+	labelInst.global_position = $cursor.position
+	add_child(labelInst)
+
+func toggleHint(state : bool):
+	%cancelHint.visible = state
 
 func playAnimation(anim : String):
 	$anim.play(anim)

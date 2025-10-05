@@ -31,3 +31,6 @@ Use,Use,Использовать
 Throw,Throw,Бросить
 Drop,Drop,Удалить
 Shoot,Shoot,Выстрелить
+no_bullets,Not enough bullets,Недостаточно патронов
+continue,Continue,Продолжить
+win,You win!,Ты победил!

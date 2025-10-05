@@ -26,7 +26,7 @@ mouse_filter = 2
 
 [node name="tooltip" type="PanelContainer" parent="."]
 z_index = 1
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(200, 50)
 layout_mode = 0
 offset_top = -51.0
 offset_right = 50.0

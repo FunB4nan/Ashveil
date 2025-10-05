@@ -7,9 +7,12 @@ var parent : Obstacle
 func _ready() -> void:
 	texture_normal = item.sprite
 	%Name.text = tr(item.title) 
-	%Description.text = tr(item.title + "Desc")
+	if item is Weapon:
+		%Description.text = tr("weaponStats") % [item.damage, item.distance, item.usage]
+	else:
+		%Description.text = tr(item.title + "Desc")
 	$amount.text = str(amount)
-	$tooltip.position = Vector2(-$tooltip.size.x / 4, - $tooltip.size.y - 32)
+	$tooltip.position = Vector2(-$tooltip.size.x / 4, - $tooltip.size.y - 48)
 	$tooltip.visible = false
 	mouse_entered.connect(showTooltip)
 	mouse_exited.connect(hideTooltip)

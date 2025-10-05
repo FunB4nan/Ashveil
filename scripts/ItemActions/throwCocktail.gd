@@ -5,6 +5,8 @@ class_name ThrowCocktail
 func act(source):
 	source.hideTooltip()
 	var cell = await Global.main.chooseCellToAct(5)
+	if cell == null:
+		return
 	await Global.main.throwProjectile("cocktail", cell)
 	AudioManager.play("molotov")
 	if Global.main.map[cell] != 0:

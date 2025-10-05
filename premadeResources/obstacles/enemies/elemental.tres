@@ -19,5 +19,5 @@ ExtResource("3_xhv6j"): [1, 1],
 ExtResource("4_s57pd"): [1, 3]
 })
 sprite = SubResource("AtlasTexture_xhv6j")
-value = 40
+value = 60
 metadata/_custom_type_script = "uid://cc14oiwxat4rv"

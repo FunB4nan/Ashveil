@@ -75,6 +75,8 @@ func _input(event: InputEvent) -> void:
 		var mousePos = Vector2(floor(get_global_mouse_position().x / 32), floor(get_global_mouse_position().y / 32))
 		if Vector2i(mousePos) in map:
 			cellSelected.emit(mousePos)
+	if event.is_action_pressed("RMB"):
+		cellSelected.emit(null)
 
 func openTile(pos : Vector2i):
 	if map.has(pos):
@@ -83,7 +85,9 @@ func openTile(pos : Vector2i):
 			if map[pos] > 0:
 				createEnemy(enemiesOnMap[pos], pos)
 			else:
-				createChest(pos, enemies[enemiesOnMap[pos]].loot)
+				var enemyInst = enemies[enemiesOnMap[pos]]
+				if enemyInst is Enemy:
+					createChest(pos, enemyInst.loot)
 		else:
 			createLabel(pos, getNeighboursSum(pos))
 		if !(pos in $tiles.get_used_cells()):
@@ -100,8 +104,8 @@ func throwProjectile(title, pos):
 	projecttileInst.queue_free()
 
 func chooseCellToAct(distance : int):
-	print("is aiming", distance)
 	await get_tree().create_timer(0.1).timeout
+	UI.toggleHint(true)
 	UI.get_node("cursor").switchState(UI.get_node("cursor").sprites.AIM)
 	isChoosingCell = true
 	var availableArea : Array[Vector2]
@@ -113,14 +117,18 @@ func chooseCellToAct(distance : int):
 			previewInst.scale = Vector2.ZERO
 			$distancePreview.add_child(previewInst)
 			TweenManager.scaleTween(previewInst, Vector2.ONE)
-	print("area shown")
 	var cell = Vector2(80, 80)
 	while !(cell in availableArea):
 		cell = await cellSelected
+		if cell == null:
+			break
 	for preview in $distancePreview.get_children():
 		preview.queue_free()
 	isChoosingCell = false
+	UI.toggleHint(false)
 	UI.get_node("cursor").switchState(UI.get_node("cursor").sprites.DEFAULT)
+	if cell == null:
+		return null
 	return Vector2i(cell)
 
 func getNeighboursSum(pos : Vector2i):
@@ -186,7 +194,7 @@ func generateChunk(restrictedCells : Array[Vector2]):
 	for i in range(-CHUNK_SIZE / 2,CHUNK_SIZE / 2):
 		for j in range(-CHUNK_SIZE / 2,CHUNK_SIZE / 2):
 			if Vector2i(i, j) == elementalPos:
-				map[elementalPos] = 40
+				map[elementalPos] = 60
 				enemiesOnMap[elementalPos] = "elemental"
 				openTile(elementalPos)
 			elif Vector2(i, j) in mines:
