@@ -17,10 +17,12 @@ func _ready() -> void:
 
 func addItem():
 	if UI.getItemCount() < Global.main.inventorySize:
+		AudioManager.play("pickup", false, true)
 		UI.addItem(item, amount)
 		parent.deleteItem(self)
 
 func showTooltip():
+	AudioManager.play("Abstract", false, true)
 	$tooltip.visible = true
 	TweenManager.scaleTween(self, Vector2(1.1, 1.1))
 

@@ -29,10 +29,11 @@ func move(vector : Vector2i):
 	$anim.play("moving")
 	Global.main.playerLivingObstacle.emit(gridPos)
 	var danger = Global.main.openTile(gridPos + vector)
+	AudioManager.play("step", true, true)
 	if danger != null:
 		gridPos += vector
 		Global.main.moveDay()
-		await TweenManager.moveTween(self, global_position + Vector2(vector) * 32, 0.3)
+		await TweenManager.moveTween(self, global_position + Vector2(vector) * 32, 0.4)
 		if danger > hp:
 			kill()
 			return
@@ -44,12 +45,17 @@ func move(vector : Vector2i):
 			print(hp)
 			if danger > 0:
 				gridPos -= vector
-				await TweenManager.moveTween(self, global_position - Vector2(vector) * 32, 0.3)
+				await TweenManager.moveTween(self, global_position - Vector2(vector) * 32, 0.4)
 				Global.main.openTile(gridPos + vector)
 	isMoving = false
 	print((position - OFFSET) / 32)
 
+func playAnimation(anim : String):
+	$anim.play(anim)
+	await $anim.animation_finished
+
 func kill():
+	AudioManager.play("gameOver")
 	Global.camera.shake(200,0.1,300)
 	$anim.play("death")
 	UI.playAnimation("gameOver")

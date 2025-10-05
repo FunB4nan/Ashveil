@@ -1,15 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0b0h155os8pd"]
+[gd_scene load_steps=4 format=3 uid="uid://d0b0h155os8pd"]
 
+[ext_resource type="Material" uid="uid://ck28uvpbtq17x" path="res://shaders/outline.tres" id="1_dvkw2"]
 [ext_resource type="Texture2D" uid="uid://bnncapmfkakul" path="res://premadeResources/defaultObstacleSprite.tres" id="1_qad6s"]
 [ext_resource type="Script" uid="uid://8hnlysledug4" path="res://scripts/UI/itemInChest.gd" id="1_vpfhr"]
 
 [node name="itemInChest" type="TextureButton"]
+material = ExtResource("1_dvkw2")
 offset_right = 32.0
 offset_bottom = 32.0
 texture_normal = ExtResource("1_qad6s")
 script = ExtResource("1_vpfhr")
 
+[node name="PanelContainer" type="PanelContainer" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="tooltip" type="PanelContainer" parent="."]
+z_index = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
 offset_top = -51.0
@@ -25,6 +38,11 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="tooltip/VBoxContainer"]
+custom_minimum_size = Vector2(80, 2)
+layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="Description" type="Label" parent="tooltip/VBoxContainer"]
 unique_name_in_owner = true

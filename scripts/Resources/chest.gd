@@ -2,7 +2,7 @@ extends ObstacleInfo
 
 class_name Chest
 
-@export var loot : Dictionary[Item, int]
+@export var loot : Dictionary[Item, Array]
 
 func actBeforeDeath(source):
 	source.showPanel()

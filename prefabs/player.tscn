@@ -1,13 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2455ttguhdni"]
+[gd_scene load_steps=18 format=3 uid="uid://b2455ttguhdni"]
 
 [ext_resource type="Script" uid="uid://b4h5upjfrw15s" path="res://scripts/player.gd" id="1_r66lb"]
 [ext_resource type="Material" uid="uid://ck28uvpbtq17x" path="res://shaders/outline.tres" id="2_1txc5"]
 [ext_resource type="Script" uid="uid://c4804rvkfinl8" path="res://scripts/camera.gd" id="2_ht1c8"]
+[ext_resource type="Shader" uid="uid://bqsbwsebym1ih" path="res://shaders/shadow.gdshader" id="3_u51tk"]
 [ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="4_g2jcq"]
 [ext_resource type="Texture2D" uid="uid://bw584cjmarya8" path="res://sprites/concept2.png" id="5_u51tk"]
 [ext_resource type="Texture2D" uid="uid://cmxn8lhm5m5dw" path="res://sprites/concept3.png" id="6_kbsxf"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tbgi4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rgeog"]
+shader = ExtResource("3_u51tk")
+shader_parameter/look_left_down = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbsxf"]
 atlas = ExtResource("4_g2jcq")
 region = Rect2(0, 0, 32, 32)
 
@@ -80,7 +85,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_sugp2"]
 resource_name = "moving"
-length = 0.3
+length = 0.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -89,10 +94,10 @@ tracks/0/path = NodePath("sprite:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 0.9), Vector2(0.9, 1.1), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1.1, 0.9), Vector2(0.9, 1.1), Vector2(1.1, 0.9), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -101,10 +106,10 @@ tracks/1/path = NodePath("sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -10), Vector2(0, 0), Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -119,11 +124,68 @@ tracks/2/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_u51tk"]
+resource_name = "shoot"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-0.232996, -1.2448), Vector2(-0.90324, 0.0334758), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.316574, 0.161142, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.838608, 1.22827), Vector2(0.988773, 0.979313), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tbgi4"]
 _data = {
 &"RESET": SubResource("Animation_jyhfs"),
 &"death": SubResource("Animation_r66lb"),
-&"moving": SubResource("Animation_sugp2")
+&"moving": SubResource("Animation_sugp2"),
+&"shoot": SubResource("Animation_u51tk")
+}
+
+[sub_resource type="Animation" id="Animation_opo22"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_g2jcq")]
 }
 
 [sub_resource type="Animation" id="Animation_rgeog"]
@@ -144,21 +206,6 @@ tracks/0/keys = {
 "values": [ExtResource("4_g2jcq"), ExtResource("5_u51tk"), ExtResource("6_kbsxf")]
 }
 
-[sub_resource type="Animation" id="Animation_opo22"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture:atlas")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_g2jcq")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8rb0w"]
 _data = {
 &"RESET": SubResource("Animation_opo22"),
@@ -176,9 +223,16 @@ script = ExtResource("2_ht1c8")
 
 [node name="Timer" type="Timer" parent="camera"]
 
+[node name="shadow" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_rgeog")
+position = Vector2(13, 19)
+scale = Vector2(1.03125, 1.25)
+texture = SubResource("AtlasTexture_kbsxf")
+
 [node name="sprite" type="Sprite2D" parent="."]
 material = ExtResource("2_1txc5")
-texture = SubResource("AtlasTexture_tbgi4")
+texture = SubResource("AtlasTexture_kbsxf")
 offset = Vector2(0, -10.5)
 
 [node name="anim" type="AnimationPlayer" parent="."]

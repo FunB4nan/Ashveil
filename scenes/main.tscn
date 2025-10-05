@@ -82,6 +82,21 @@ shader_parameter/add_margins = false
 atlas = ExtResource("4_tefeu")
 region = Rect2(1120, 32, 64, 64)
 
+[sub_resource type="Animation" id="Animation_tipki"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_tefeu")]
+}
+
 [sub_resource type="Animation" id="Animation_o6xl0"]
 resource_name = "idle"
 length = 0.6
@@ -100,25 +115,25 @@ tracks/0/keys = {
 "values": [ExtResource("4_tefeu"), ExtResource("5_o6xl0"), ExtResource("6_tipki")]
 }
 
-[sub_resource type="Animation" id="Animation_tipki"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_85g3d"]
+_data = {
+&"RESET": SubResource("Animation_tipki"),
+&"idle": SubResource("Animation_o6xl0")
+}
+
+[sub_resource type="Animation" id="Animation_85g3d"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:atlas")
+tracks/0/path = NodePath("sun:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_tefeu")]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_85g3d"]
-_data = {
-&"RESET": SubResource("Animation_tipki"),
-&"idle": SubResource("Animation_o6xl0")
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_tefeu"]
@@ -137,25 +152,49 @@ tracks/0/keys = {
 "values": [0.0, 6.28319]
 }
 
-[sub_resource type="Animation" id="Animation_85g3d"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_choun"]
+_data = {
+&"RESET": SubResource("Animation_85g3d"),
+&"idle": SubResource("Animation_tefeu")
+}
+
+[sub_resource type="Animation" id="Animation_trceg"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("sun:rotation")
+tracks/0/path = NodePath("ParallaxBackground/ParallaxLayer/sun:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(529, 33)]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_choun"]
-_data = {
-&"RESET": SubResource("Animation_85g3d"),
-&"idle": SubResource("Animation_tefeu")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ParallaxBackground/ParallaxLayer/moon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-318, 429)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("tiles:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_eb6dy"]
@@ -197,45 +236,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 0.47451, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_trceg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ParallaxBackground/ParallaxLayer/sun:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(529, 33)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ParallaxBackground/ParallaxLayer/moon:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-318, 429)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("tiles:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_a8y0u"]
@@ -290,6 +290,7 @@ _data = {
 script = ExtResource("1_o5qli")
 
 [node name="tiles" type="TileMapLayer" parent="."]
+z_index = -2
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_jyhfs")
 

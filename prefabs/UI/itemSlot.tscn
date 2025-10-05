@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtgfu0y8okygv"]
+[gd_scene load_steps=11 format=3 uid="uid://dtgfu0y8okygv"]
 
+[ext_resource type="Material" uid="uid://ck28uvpbtq17x" path="res://shaders/outline.tres" id="1_a6an0"]
 [ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="1_ggeq2"]
 [ext_resource type="Script" uid="uid://ksyd3kfqxys" path="res://scripts/UI/itemSlot.gd" id="1_wg6il"]
 [ext_resource type="Resource" uid="uid://b3vwmh5wv5ylh" path="res://premadeResources/weapons/pistol.tres" id="3_ejntg"]
@@ -10,6 +11,21 @@
 resource_local_to_scene = true
 atlas = ExtResource("1_ggeq2")
 region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="Animation" id="Animation_qpc5m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_normal:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_ggeq2")]
+}
 
 [sub_resource type="Animation" id="Animation_68u8g"]
 resource_name = "idle"
@@ -29,21 +45,6 @@ tracks/0/keys = {
 "values": [ExtResource("1_ggeq2"), ExtResource("4_a6an0"), ExtResource("5_3ycf7")]
 }
 
-[sub_resource type="Animation" id="Animation_qpc5m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture_normal:atlas")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_ggeq2")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f4ufb"]
 _data = {
 &"RESET": SubResource("Animation_qpc5m"),
@@ -51,15 +52,29 @@ _data = {
 }
 
 [node name="itemSlot" type="TextureButton"]
-custom_minimum_size = Vector2(32, 32)
+material = ExtResource("1_a6an0")
+custom_minimum_size = Vector2(48, 48)
 offset_right = 40.0
 offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture_normal = SubResource("AtlasTexture_ejntg")
 stretch_mode = 5
 script = ExtResource("1_wg6il")
 item = ExtResource("3_ejntg")
 
+[node name="PanelContainer" type="PanelContainer" parent="."]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="tooltip" type="PanelContainer" parent="."]
+z_index = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
 offset_left = -50.0
@@ -78,6 +93,11 @@ size_flags_vertical = 6
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="ColorRect" type="ColorRect" parent="tooltip/VBoxContainer"]
+custom_minimum_size = Vector2(80, 2)
+layout_mode = 2
+size_flags_horizontal = 4
+
 [node name="Description" type="Label" parent="tooltip/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
@@ -92,9 +112,11 @@ layout_mode = 2
 
 [node name="amount" type="Label" parent="."]
 layout_mode = 0
-offset_top = 26.0
-offset_right = 40.0
-offset_bottom = 42.0
+offset_top = 27.0
+offset_right = 48.0
+offset_bottom = 51.0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 24
 text = "1"
 horizontal_alignment = 2
 

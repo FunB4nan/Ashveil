@@ -7,6 +7,8 @@ func act(source):
 	if bullets == null || bullets.item.amount < source.item.usage:
 		return
 	var cell = await Global.main.chooseCellToAct(source.item.distance)
+	AudioManager.play("shoot")
+	await Global.player.playAnimation("shoot")
 	if Global.main.map[cell] != 0:
 		Global.main.map[cell] = Global.main.map[cell] - source.item.damage
 		Global.main.cellEdited.emit(cell)

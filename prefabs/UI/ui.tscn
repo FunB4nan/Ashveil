@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsprud7eke4hw"]
+[gd_scene load_steps=18 format=3 uid="uid://dsprud7eke4hw"]
 
 [ext_resource type="Script" uid="uid://bd8c0yj7jndi" path="res://scripts/UI/ui.gd" id="1_kh8tx"]
 [ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="2_2oqpd"]
+[ext_resource type="Material" uid="uid://ck28uvpbtq17x" path="res://shaders/outline.tres" id="2_6yajo"]
 [ext_resource type="Shader" uid="uid://bqbapyij77dl4" path="res://shaders/crt.gdshader" id="2_daqmn"]
 [ext_resource type="PackedScene" uid="uid://dtgfu0y8okygv" path="res://prefabs/UI/itemSlot.tscn" id="3_vcb6d"]
 [ext_resource type="Texture2D" uid="uid://bw584cjmarya8" path="res://sprites/concept2.png" id="6_6yajo"]
@@ -14,6 +15,11 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vcb6d"]
 atlas = ExtResource("2_2oqpd")
 region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqnw1"]
+resource_local_to_scene = true
+atlas = ExtResource("2_2oqpd")
+region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wj31q"]
 shader = ExtResource("2_daqmn")
@@ -85,6 +91,33 @@ _data = {
 &"gameOver": SubResource("Animation_daqmn")
 }
 
+[sub_resource type="Animation" id="Animation_ww18o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/playerStats/HBoxContainer/playerIcon:texture:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2oqpd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/playerStats/HBoxContainer/hpIcon:texture:atlas")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2oqpd")]
+}
+
 [sub_resource type="Animation" id="Animation_m8ghc"]
 resource_name = "idle"
 length = 0.6
@@ -115,33 +148,6 @@ tracks/1/keys = {
 "values": [ExtResource("2_2oqpd"), ExtResource("6_6yajo"), ExtResource("7_j3q48")]
 }
 
-[sub_resource type="Animation" id="Animation_ww18o"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/playerStats/HBoxContainer/playerIcon:texture:atlas")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_2oqpd")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/playerStats/HBoxContainer/hpIcon:texture:atlas")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_2oqpd")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fhwqs"]
 _data = {
 &"RESET": SubResource("Animation_ww18o"),
@@ -168,12 +174,6 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
-
-[node name="settings" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-focus_mode = 0
-text = "Settings"
 
 [node name="settings" type="PanelContainer" parent="MarginContainer"]
 unique_name_in_owner = true
@@ -296,32 +296,53 @@ focus_mode = 0
 text = "close"
 
 [node name="playerStats" type="PanelContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(522, 80)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/playerStats"]
 layout_mode = 2
+theme_override_constants/separation = 11
 
 [node name="playerIcon" type="TextureRect" parent="MarginContainer/playerStats/HBoxContainer"]
+material = ExtResource("2_6yajo")
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 texture = SubResource("AtlasTexture_hteqg")
 stretch_mode = 5
 
 [node name="hpIcon" type="TextureRect" parent="MarginContainer/playerStats/HBoxContainer"]
+material = ExtResource("2_6yajo")
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 texture = SubResource("AtlasTexture_vcb6d")
+stretch_mode = 5
 
 [node name="hp" type="Label" parent="MarginContainer/playerStats/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 28
 text = "10"
 
 [node name="inventory" type="HBoxContainer" parent="MarginContainer/playerStats/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 10
 
 [node name="itemSlot" parent="MarginContainer/playerStats/HBoxContainer/inventory" instance=ExtResource("3_vcb6d")]
 layout_mode = 2
+texture_normal = SubResource("AtlasTexture_yqnw1")
+
+[node name="settings" type="Button" parent="MarginContainer/playerStats/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+text = "Settings"
 
 [node name="gameOverLabel" type="Label" parent="."]
 offset_left = 10.0
@@ -335,6 +356,7 @@ text = "Game Over!"
 horizontal_alignment = 1
 
 [node name="crt" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_wj31q")
 anchors_preset = 15
 anchor_right = 1.0
@@ -370,11 +392,11 @@ libraries = {
 }
 autoplay = "idle"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]
 [connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/music/musicSlider" to="." method="updateSettings"]
 [connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/sound/sfxSlider" to="." method="updateSettings"]
 [connection signal="pressed" from="MarginContainer/settings/MarginContainer/VBoxContainer/language/previousLanguage" to="." method="_on_previous_language_pressed"]
 [connection signal="pressed" from="MarginContainer/settings/MarginContainer/VBoxContainer/language/nextLanguage" to="." method="_on_next_language_pressed"]
 [connection signal="toggled" from="MarginContainer/settings/MarginContainer/VBoxContainer/HBoxContainer/crt" to="." method="updateSettings"]
 [connection signal="pressed" from="MarginContainer/settings/MarginContainer/closeSettings" to="." method="_on_close_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/playerStats/HBoxContainer/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="retryButton" to="." method="_on_retry_button_pressed"]

@@ -17,12 +17,14 @@ func _ready() -> void:
 	mouse_exited.connect(onMouseExited)
 
 func onMouseEntered():
+	AudioManager.play("Abstract", false, true)
 	TweenManager.scaleTween(self, Vector2(1.1, 1.1))
 
 func onMouseExited():
 	TweenManager.scaleTween(self, Vector2.ONE)
 
 func toggleTooltip():
+	AudioManager.play("Abstract", false, true)
 	UI.hideAllTooltips(self)
 	$tooltip.visible = !$tooltip.visible
 	updateTooltip()

@@ -15,7 +15,7 @@ const SLIME_AMOUNT = 10
 const WORM_AMOUNT = 8
 const BALL_AMOUNT = 3
 
-const STEPS_BETWEEN_SHIFT = 10
+const STEPS_BETWEEN_SHIFT = 20
 
 
 var obstacle = preload("res://prefabs/obstacle.tscn")
@@ -34,10 +34,11 @@ var map : Dictionary[Vector2i, int]
 var enemiesOnMap : Dictionary[Vector2i, String]
 var chests : Array[Vector2i]
 
-var inventorySize : int = 10
+var inventorySize : int = 5
 var dayTime = 0
 
 func _ready() -> void:
+	AudioManager.play("forest")
 	var restrictedCells : Array[Vector2]
 	for i in range(-START_RADIUS, START_RADIUS):
 		for j in range(-START_RADIUS, START_RADIUS):
@@ -116,7 +117,7 @@ func createEnemy(title : String, pos : Vector2i):
 	enemyInst.info.value = map[pos]
 	$playground.add_child(enemyInst)
 
-func createChest(pos : Vector2i, loot):
+func createChest(pos : Vector2i, loot : Dictionary[Item, Array]):
 	if pos in chests:
 		return
 	var chestInst = obstacle.instantiate()

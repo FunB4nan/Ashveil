@@ -6,6 +6,8 @@ extends Node
 var currentMusic : String = ""
 
 func _ready() -> void:
+	musics = ResourceManager.loadFiles("res://audio/music/", true)
+	sounds = ResourceManager.loadFiles("res://audio/sounds/", true)
 	for sound in sounds.keys():
 		var soundInst = AudioStreamPlayer.new()
 		soundInst.name = sound
@@ -28,8 +30,10 @@ func _on_audio_finished():
 		play("bossLoop", false)
 		return
 
-func play(title : String, withTransition : bool = true):
+func play(title : String, withTransition : bool = true, randomPitch = false):
 	if title in sounds.keys():
+		if randomPitch:
+			get_node(title).pitch_scale = randf_range(0.6, 1.4)
 		get_node(title).play()
 	elif title in musics.keys():
 		if title == currentMusic:

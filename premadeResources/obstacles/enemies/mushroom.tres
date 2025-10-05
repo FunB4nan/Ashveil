@@ -11,8 +11,8 @@ region = Rect2(448, 0, 32, 32)
 
 [resource]
 script = ExtResource("2_vo5hi")
-loot = Dictionary[ExtResource("1_wdnn1"), int]({
-ExtResource("2_5oy0g"): 1
+loot = Dictionary[ExtResource("1_wdnn1"), Array]({
+ExtResource("2_5oy0g"): [1, 2]
 })
 createdChest = false
 sprite = SubResource("AtlasTexture_0wjuc")
