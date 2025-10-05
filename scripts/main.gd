@@ -27,15 +27,18 @@ var enemies = {
 	"mushroom" : preload("res://premadeResources/obstacles/enemies/mushroom.tres"),
 	"worm" : preload("res://premadeResources/obstacles/enemies/worm.tres"),
 	"ball" : preload("res://premadeResources/obstacles/enemies/ball.tres"),
-	"mine" : preload("res://premadeResources/obstacles/mine.tres")
+	"mine" : preload("res://premadeResources/obstacles/mine.tres"),
+	"elemental" : preload("res://premadeResources/obstacles/enemies/elemental.tres")
 }
 
 var map : Dictionary[Vector2i, int]
 var enemiesOnMap : Dictionary[Vector2i, String]
 var chests : Array[Vector2i]
+var elementalPos : Vector2i
 
 var inventorySize : int = 5
 var dayTime = 0
+var tutrorialShown = false
 
 func _ready() -> void:
 	AudioManager.play("forest")
@@ -48,9 +51,14 @@ func _ready() -> void:
 	for i in range(-START_RADIUS, START_RADIUS + 1):
 		for j in range(-START_RADIUS, START_RADIUS + 1):
 			openTile(Vector2(i, j))
+	openTile(elementalPos)
+	Global.mapGenerated.emit()
 
 func moveDay():
 	dayTime += 1
+	if dayTime == 3 && !tutrorialShown:
+		UI.showTutorial("sumTutor")
+		tutrorialShown = true
 	if dayTime == STEPS_BETWEEN_SHIFT:
 		$anim.play("dayToNight")
 	elif dayTime == STEPS_BETWEEN_SHIFT * 2:
@@ -140,6 +148,8 @@ func generateChunk(restrictedCells : Array[Vector2]):
 	var mushs : Array[Vector2]
 	var worms : Array[Vector2]
 	var balls : Array[Vector2]
+	elementalPos = randomizeObstaclePos([], restrictedCells)
+	restrictedCells.append(Vector2(elementalPos))
 	for i in range(MINE_AMOUNT):
 		mines.append(randomizeObstaclePos(mines, restrictedCells))
 	restrictedCells.append_array(mines)
@@ -157,7 +167,10 @@ func generateChunk(restrictedCells : Array[Vector2]):
 	restrictedCells.append_array(balls)
 	for i in range(-CHUNK_SIZE / 2,CHUNK_SIZE / 2):
 		for j in range(-CHUNK_SIZE / 2,CHUNK_SIZE / 2):
-			if Vector2(i, j) in mines:
+			if Vector2i(i, j) == elementalPos:
+				map[elementalPos] = 40
+				enemiesOnMap[elementalPos] = "elemental"
+			elif Vector2(i, j) in mines:
 				map[Vector2i(i, j)] = 100
 				enemiesOnMap[Vector2i(i, j)] = "mine"
 			elif Vector2(i, j) in slimes:

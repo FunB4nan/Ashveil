@@ -24,6 +24,8 @@ func onMouseExited():
 	TweenManager.scaleTween(self, Vector2.ONE)
 
 func toggleTooltip():
+	UI.get_node("anim").stop()
+	UI.get_node("itemTutor").visible = false
 	AudioManager.play("Abstract", false, true)
 	UI.hideAllTooltips(self)
 	$tooltip.visible = !$tooltip.visible

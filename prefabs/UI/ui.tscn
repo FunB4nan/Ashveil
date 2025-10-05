@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://dsprud7eke4hw"]
+[gd_scene load_steps=26 format=3 uid="uid://dsprud7eke4hw"]
 
 [ext_resource type="Script" uid="uid://bd8c0yj7jndi" path="res://scripts/UI/ui.gd" id="1_kh8tx"]
 [ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="2_2oqpd"]
 [ext_resource type="Material" uid="uid://ck28uvpbtq17x" path="res://shaders/outline.tres" id="2_6yajo"]
 [ext_resource type="Shader" uid="uid://bqbapyij77dl4" path="res://shaders/crt.gdshader" id="2_daqmn"]
 [ext_resource type="PackedScene" uid="uid://dtgfu0y8okygv" path="res://prefabs/UI/itemSlot.tscn" id="3_vcb6d"]
+[ext_resource type="Shader" uid="uid://blb57m12et8nr" path="res://shaders/outline.gdshader" id="5_j3q48"]
 [ext_resource type="Texture2D" uid="uid://bw584cjmarya8" path="res://sprites/concept2.png" id="6_6yajo"]
+[ext_resource type="Texture2D" uid="uid://cxr1naborcw8u" path="res://sprites/sumTutor.png" id="6_j3q48"]
 [ext_resource type="Texture2D" uid="uid://cmxn8lhm5m5dw" path="res://sprites/concept3.png" id="7_j3q48"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hteqg"]
@@ -28,6 +30,22 @@ shader_parameter/crt_ghost = 0.0
 shader_parameter/crt_grid = 0.348
 shader_parameter/crt_white_noise = 0.0
 shader_parameter/crt_curve = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m8ghc"]
+shader = ExtResource("5_j3q48")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 2.0
+shader_parameter/pattern = 1
+shader_parameter/inside = false
+shader_parameter/add_margins = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ww18o"]
+atlas = ExtResource("2_2oqpd")
+region = Rect2(320, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3q48"]
+atlas = ExtResource("2_2oqpd")
+region = Rect2(588, 42, 81, 13)
 
 [sub_resource type="Animation" id="Animation_wj31q"]
 length = 0.001
@@ -54,6 +72,54 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(585, 769)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("howToMove:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("itemTutor/arrow:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("itemTutor/arrow:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(604, 563)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("itemTutor:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_daqmn"]
@@ -85,10 +151,89 @@ tracks/1/keys = {
 "values": [Vector2(585, 769), Vector2(585, 401)]
 }
 
+[sub_resource type="Animation" id="Animation_2oqpd"]
+resource_name = "hideTutorial"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("howToMove:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6yajo"]
+resource_name = "showTutorial"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("howToMove:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fhwqs"]
+resource_name = "pointOnItem"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("itemTutor/arrow:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("itemTutor/arrow:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(163, 18), Vector2(163, 28)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("itemTutor:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hteqg"]
 _data = {
 &"RESET": SubResource("Animation_wj31q"),
-&"gameOver": SubResource("Animation_daqmn")
+&"gameOver": SubResource("Animation_daqmn"),
+&"hideTutorial": SubResource("Animation_2oqpd"),
+&"pointOnItem": SubResource("Animation_fhwqs"),
+&"showTutorial": SubResource("Animation_6yajo")
 }
 
 [sub_resource type="Animation" id="Animation_ww18o"]
@@ -156,6 +301,34 @@ _data = {
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_kh8tx")
+
+[node name="howToMove" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -198.0
+offset_right = 64.0
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Move"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="howToMove"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 57.0
+offset_right = 114.0
+offset_bottom = 132.0
+theme_override_font_sizes/font_size = 36
+text = "W
+A S D"
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -293,7 +466,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 focus_mode = 0
-text = "close"
+text = "close_button"
 
 [node name="playerStats" type="PanelContainer" parent="MarginContainer"]
 custom_minimum_size = Vector2(522, 80)
@@ -365,6 +538,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="itemTutor" type="Label" parent="."]
+visible = false
+offset_left = 429.0
+offset_top = 560.0
+offset_right = 804.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 16
+text = "clickItem"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="arrow" type="TextureRect" parent="itemTutor"]
+material = SubResource("ShaderMaterial_m8ghc")
+custom_minimum_size = Vector2(64, 64)
+offset_left = 604.0
+offset_top = 563.0
+offset_right = 668.0
+offset_bottom = 627.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_ww18o")
+stretch_mode = 5
+
+[node name="back" type="TextureRect" parent="itemTutor"]
+modulate = Color(1, 1, 1, 0.635294)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_j3q48")
+
 [node name="retryButton" type="Button" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -380,6 +588,55 @@ grow_vertical = 2
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 48
 text = "retry"
+
+[node name="tutorial" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -140.0
+offset_right = 100.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="tutorial"]
+layout_mode = 2
+
+[node name="tutorTitle" type="RichTextLabel" parent="tutorial/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[color=red]Move carefully![/color]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="tutorImage" type="TextureRect" parent="tutorial/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("6_j3q48")
+stretch_mode = 5
+
+[node name="tutorDescription" type="RichTextLabel" parent="tutorial/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Look at the numbers, they show the health of the enemies around them."
+fit_content = true
+horizontal_alignment = 1
+
+[node name="closeTutor" type="Button" parent="tutorial/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "close_button"
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -400,3 +657,4 @@ autoplay = "idle"
 [connection signal="pressed" from="MarginContainer/settings/MarginContainer/closeSettings" to="." method="_on_close_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/playerStats/HBoxContainer/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="retryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="tutorial/VBoxContainer/closeTutor" to="." method="_on_close_tutor_pressed"]

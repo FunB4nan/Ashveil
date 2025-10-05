@@ -1,6 +1,7 @@
 extends Node
 
 signal localeChaged
+signal mapGenerated
 
 const languages = ["english","русский"]
 

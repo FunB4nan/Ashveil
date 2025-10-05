@@ -5,15 +5,21 @@ class_name Player
 const OFFSET = Vector2(16, 16)
 
 var gridPos : Vector2i = Vector2i.ZERO
-var isMoving = false
+var isMoving = true
 var hp = 20
 
 func _ready() -> void:
 	Global.player = self
 	UI.updateUI()
+	await Global.mapGenerated
+	await get_tree().create_timer(0.3).timeout
+	await TweenManager.moveTween($camera, Global.main.elementalPos * 32, 1.0)
+	await TweenManager.moveTween($camera, Vector2.ZERO, 1.0)
+	UI.playAnimation("showTutorial")
+	isMoving = false
 
 func _input(event: InputEvent) -> void:
-	if isMoving:
+	if isMoving || UI.get_node("tutorial").visible:
 		return
 	if event.is_action_pressed("ui_right"):
 		move(Vector2i(1, 0))
@@ -25,6 +31,7 @@ func _input(event: InputEvent) -> void:
 		move(Vector2i(0, 1))
 
 func move(vector : Vector2i):
+	UI.hideMoveTutorial()
 	isMoving = true
 	$anim.play("moving")
 	Global.main.playerLivingObstacle.emit(gridPos)

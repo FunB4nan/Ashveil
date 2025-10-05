@@ -5,3 +5,10 @@ Music,Music,Музыка
 Sounds,Sounds,Звуки
 weaponStats,Damage: %d\nDistance: %d\nBullet usage: %d,Урон: %d\nРасстояние: %d\nРасход патронов: %d
 bulletsDesc,Consumes when you shoot,"Тратятся, когда вы стреляйте"
+sumTutor,[color=red]Move carefully!,[color=red]Двигайся аккуратно!
+checkTutor,You can step on enemy cell,Ты можешь передвинуться на клетку врага
+sumTutorDesc,"Look at the numbers, they show the health of the enemies around them.","Смотри на числа, они показывают здоровье врагов вокруг себя"
+checkTutorDesc,"But if your health is lower, you will lose.","Но если твое здоровье меньше, ты проиграешь"
+close_button,Close,Закрыть
+Move,Move,Ходить
+clickItem,Click on slot to see details,Кликни на слот чтобы узнать детали

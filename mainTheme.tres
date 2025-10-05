@@ -88,3 +88,5 @@ Label/constants/outline_size = 4
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_re4k2")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_re4k2")
+RichTextLabel/constants/outline_size = 4
+RichTextLabel/fonts/normal_font = ExtResource("1_re4k2")

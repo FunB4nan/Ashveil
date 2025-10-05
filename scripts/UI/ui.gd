@@ -5,6 +5,8 @@ var itemSlot = preload("res://prefabs/UI/itemSlot.tscn")
 var gameLoaded = false
 var languageIndex = 0
 
+var itemUseShown = false
+
 func _ready() -> void:
 	updateSettings()
 
@@ -63,6 +65,9 @@ func addItem(item : Item, amount = 0):
 	slotInst.item = item
 	slotInst.item.amount = amount
 	%inventory.add_child(slotInst)
+	if !itemUseShown:
+		$anim.play("pointOnItem")
+		itemUseShown = true
 
 func findItem(title : String):
 	for slot in %inventory.get_children():
@@ -75,6 +80,17 @@ func getItemCount():
 
 func playAnimation(anim : String):
 	$anim.play(anim)
+
+func hideMoveTutorial():
+	if $howToMove.modulate == Color(1.0, 1.0, 1.0, 0.0):
+		return
+	$anim.play("hideTutorial")
+
+func showTutorial(sprite : String):
+	$tutorial.visible = true
+	%tutorTitle.text = tr(sprite)
+	%tutorDescription.text = tr(sprite + "Desc")
+	%tutorImage.texture = load("res://sprites/%s.png" % sprite)
 
 func _on_previous_language_pressed() -> void:
 	if languageIndex > 0:
@@ -103,3 +119,9 @@ func _on_retry_button_pressed() -> void:
 		item.queue_free()
 	await get_tree().create_timer(0.1).timeout
 	addItem(load("res://premadeResources/weapons/pistol.tres"), 1)
+
+
+func _on_close_tutor_pressed() -> void:
+	$tutorial.visible = false
+	if %tutorTitle.text == tr("sumTutor"):
+		showTutorial("checkTutor")
