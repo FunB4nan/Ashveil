@@ -26,7 +26,7 @@ func onMouseExited():
 	TweenManager.scaleTween(self, Vector2.ONE)
 
 func toggleTooltip():
-	if Global.main.isChoosingCell:
+	if Global.main.isChoosingCell || Global.player.isMoving:
 		return
 	if UI.get_node("itemTutor").visible:
 		UI.get_node("anim").stop()
