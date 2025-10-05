@@ -53,6 +53,7 @@ func move(vector : Vector2i):
 			Global.main.cellEdited.emit(gridPos)
 			if danger > 0:
 				if def != 0:
+					Global.camera.shake(200,0.1,300)
 					armor.subAmount(1)
 				if danger - def > 0:
 					hp -= danger - def

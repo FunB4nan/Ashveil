@@ -21,6 +21,6 @@ sprite = SubResource("AtlasTexture_7d8sx")
 title = "bullets"
 buttons = Array[ExtResource("1_0ddms")]([SubResource("Resource_7d8sx")])
 initialEffects = Array[ExtResource("1_0ddms")]([])
-amount = 1
+amount = 5
 canStack = true
 metadata/_custom_type_script = "uid://pm8v0a1oee6h"

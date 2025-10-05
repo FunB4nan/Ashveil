@@ -11,6 +11,7 @@ func act(source):
 	var cell = await Global.main.chooseCellToAct(source.item.distance)
 	if cell == null:
 		return
+	Global.camera.shake(200,0.1,300)
 	AudioManager.play("shoot")
 	await Global.player.playAnimation("shoot")
 	if Global.main.map[cell] != 0:

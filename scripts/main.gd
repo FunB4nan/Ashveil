@@ -68,9 +68,6 @@ func moveDay():
 		dayTime = 0
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("showAllMap"):
-		for pos in map.keys():
-			openTile(pos)
 	if event.is_action_pressed("LMB"):
 		var mousePos = Vector2(floor(get_global_mouse_position().x / 32), floor(get_global_mouse_position().y / 32))
 		if Vector2i(mousePos) in map:

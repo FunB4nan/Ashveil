@@ -10,6 +10,7 @@ var languageIndex = 0
 var itemUseShown = false
 
 func _ready() -> void:
+	$anim.play("fadeIn")
 	updateSettings()
 	connect_all_buttons(self)
 
@@ -21,6 +22,7 @@ func connect_all_buttons(node: Node) -> void:
 		connect_all_buttons(child)
 
 func _on_any_button_mouse_entered():
+	AudioManager.play("Abstract")
 	$cursor.switchState($cursor.sprites.CLICK)
 	
 func _on_any_button_mouse_exited():
@@ -145,7 +147,11 @@ func _on_settings_pressed() -> void:
 
 
 func _on_retry_button_pressed() -> void:
+	$anim.play("fadeOut")
+	await $anim.animation_finished
 	get_tree().reload_current_scene()
+	$anim.play("fadeIn")
+	await $anim.animation_finished
 	$anim.play("RESET")
 	for item in %inventory.get_children():
 		item.queue_free()

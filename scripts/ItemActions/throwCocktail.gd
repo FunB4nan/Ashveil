@@ -8,6 +8,7 @@ func act(source):
 	if cell == null:
 		return
 	await Global.main.throwProjectile("cocktail", cell)
+	Global.camera.shake(200,0.1,300)
 	AudioManager.play("molotov")
 	if Global.main.map[cell] != 0:
 		Global.main.map[cell] = Global.main.map[cell] - 3
