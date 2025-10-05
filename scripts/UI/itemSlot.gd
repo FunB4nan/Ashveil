@@ -12,6 +12,8 @@ func _ready() -> void:
 		var buttonInst = itemButton.instantiate()
 		buttonInst.action = button
 		%actionButtons.add_child(buttonInst)
+		buttonInst.mouse_entered.connect(UI._on_any_button_mouse_entered)
+		buttonInst.mouse_exited.connect(UI._on_any_button_mouse_exited)
 	pressed.connect(toggleTooltip)
 	mouse_entered.connect(onMouseEntered)
 	mouse_exited.connect(onMouseExited)
@@ -24,8 +26,11 @@ func onMouseExited():
 	TweenManager.scaleTween(self, Vector2.ONE)
 
 func toggleTooltip():
-	UI.get_node("anim").stop()
-	UI.get_node("itemTutor").visible = false
+	if Global.main.isChoosingCell:
+		return
+	if UI.get_node("itemTutor").visible:
+		UI.get_node("anim").stop()
+		UI.get_node("itemTutor").visible = false
 	AudioManager.play("Abstract", false, true)
 	UI.hideAllTooltips(self)
 	$tooltip.visible = !$tooltip.visible
@@ -47,7 +52,16 @@ func subAmount(value : int):
 	item.amount -= value
 	update()
 	if item.amount <= 0:
-		queue_free()
+		throw()
+
+func throw():
+	pivot_offset = Vector2(24, 24)
+	$tooltip.visible = false
+	$back.visible = false
+	$amount.visible = false
+	TweenManager.moveTween(self, position + Vector2(0, 100), 2)
+	await TweenManager.rotationTween(self, 360, 2)
+	queue_free()
 
 func update():
 	$amount.text = str(item.amount)

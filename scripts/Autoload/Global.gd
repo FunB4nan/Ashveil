@@ -17,6 +17,7 @@ var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	rng.randomize()
 	await get_tree().create_timer(1).timeout
 	await Talo.players.identify("dev", str(rng.seed))

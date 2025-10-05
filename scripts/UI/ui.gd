@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var itemSlot = preload("res://prefabs/UI/itemSlot.tscn")
+var damageLabel = preload("res://prefabs/UI/damageLabel.tscn")
 
 var gameLoaded = false
 var languageIndex = 0
@@ -9,6 +10,20 @@ var itemUseShown = false
 
 func _ready() -> void:
 	updateSettings()
+	connect_all_buttons(self)
+
+func connect_all_buttons(node: Node) -> void:
+	if node is BaseButton:
+		node.mouse_entered.connect(_on_any_button_mouse_entered)
+		node.mouse_exited.connect(_on_any_button_mouse_exited)
+	for child in node.get_children():
+		connect_all_buttons(child)
+
+func _on_any_button_mouse_entered():
+	$cursor.switchState($cursor.sprites.CLICK)
+	
+func _on_any_button_mouse_exited():
+	$cursor.switchState($cursor.sprites.DEFAULT)
 
 func updateSettings(value = 0.0):
 	if gameLoaded:
@@ -48,6 +63,11 @@ func updateSettings(value = 0.0):
 	%sfx.text = str(int(%sfxSlider.value),"%")
 
 func updateUI():
+	if int(%hp.text) != Global.player.hp:
+		var labelInst = damageLabel.instantiate()
+		labelInst.value = Global.player.hp - int(%hp.text)
+		labelInst.position = Vector2(507, 638)
+		add_child(labelInst)
 	%hp.text = str(Global.player.hp)
 
 func hideAllTooltips(source):
@@ -65,6 +85,8 @@ func addItem(item : Item, amount = 0):
 	slotInst.item = item
 	slotInst.item.amount = amount
 	%inventory.add_child(slotInst)
+	slotInst.mouse_entered.connect(_on_any_button_mouse_entered)
+	slotInst.mouse_exited.connect(_on_any_button_mouse_exited)
 	if !itemUseShown:
 		$anim.play("pointOnItem")
 		itemUseShown = true

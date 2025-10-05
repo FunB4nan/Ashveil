@@ -19,7 +19,7 @@ func _ready() -> void:
 	isMoving = false
 
 func _input(event: InputEvent) -> void:
-	if isMoving || UI.get_node("tutorial").visible:
+	if isMoving || UI.get_node("tutorial").visible || Global.main.isChoosingCell:
 		return
 	if event.is_action_pressed("ui_right"):
 		move(Vector2i(1, 0))
@@ -35,7 +35,7 @@ func move(vector : Vector2i):
 	isMoving = true
 	$anim.play("moving")
 	Global.main.playerLivingObstacle.emit(gridPos)
-	var danger = Global.main.openTile(gridPos + vector)
+	var danger = await Global.main.openTile(gridPos + vector)
 	AudioManager.play("step", true, true)
 	if danger != null:
 		gridPos += vector

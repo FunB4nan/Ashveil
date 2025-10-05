@@ -46,7 +46,12 @@ func delete(pos : Vector2i):
 		await info.actBeforeDeath(self)
 	Global.main.map[gridPos] = 0
 	if !(info is Chest):
+		$anim.play("death")
+		await $anim.animation_finished
 		queue_free()
+
+func plaAudio(title : String):
+	AudioManager.play(title)
 
 func doAfterLiving(pos : Vector2i):
 	if gridPos != pos:

@@ -63,7 +63,7 @@ stretch_mode = 5
 script = ExtResource("1_wg6il")
 item = ExtResource("3_ejntg")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="back" type="PanelContainer" parent="."]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15

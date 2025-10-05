@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dsprud7eke4hw"]
+[gd_scene load_steps=31 format=3 uid="uid://dsprud7eke4hw"]
 
 [ext_resource type="Script" uid="uid://bd8c0yj7jndi" path="res://scripts/UI/ui.gd" id="1_kh8tx"]
 [ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="2_2oqpd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bw584cjmarya8" path="res://sprites/concept2.png" id="6_6yajo"]
 [ext_resource type="Texture2D" uid="uid://cxr1naborcw8u" path="res://sprites/sumTutor.png" id="6_j3q48"]
 [ext_resource type="Texture2D" uid="uid://cmxn8lhm5m5dw" path="res://sprites/concept3.png" id="7_j3q48"]
+[ext_resource type="Script" uid="uid://dkujwdr3l0530" path="res://scripts/UI/cursor.gd" id="8_m8ghc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hteqg"]
 atlas = ExtResource("2_2oqpd")
@@ -46,6 +47,49 @@ region = Rect2(320, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3q48"]
 atlas = ExtResource("2_2oqpd")
 region = Rect2(588, 42, 81, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhwqs"]
+atlas = ExtResource("2_2oqpd")
+region = Rect2(711, 38, 22, 23)
+
+[sub_resource type="Animation" id="Animation_skpy0"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_2oqpd"), ExtResource("6_6yajo"), ExtResource("7_j3q48")]
+}
+
+[sub_resource type="Animation" id="Animation_y0hgh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:atlas")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2oqpd")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2fm38"]
+_data = {
+&"RESET": SubResource("Animation_y0hgh"),
+&"idle": SubResource("Animation_skpy0")
+}
 
 [sub_resource type="Animation" id="Animation_wj31q"]
 length = 0.001
@@ -552,10 +596,11 @@ vertical_alignment = 2
 [node name="arrow" type="TextureRect" parent="itemTutor"]
 material = SubResource("ShaderMaterial_m8ghc")
 custom_minimum_size = Vector2(64, 64)
-offset_left = 604.0
-offset_top = 563.0
-offset_right = 668.0
-offset_bottom = 627.0
+layout_mode = 0
+offset_left = 163.0
+offset_top = 23.8858
+offset_right = 227.0
+offset_bottom = 87.8858
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_ww18o")
@@ -637,6 +682,22 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 text = "close_button"
+
+[node name="cursor" type="TextureRect" parent="."]
+z_index = 1
+material = ExtResource("2_6yajo")
+offset_right = 22.0
+offset_bottom = 23.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fhwqs")
+stretch_mode = 5
+script = ExtResource("8_m8ghc")
+
+[node name="anim" type="AnimationPlayer" parent="cursor"]
+libraries = {
+&"": SubResource("AnimationLibrary_2fm38")
+}
+autoplay = "idle"
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {

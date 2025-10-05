@@ -17,7 +17,6 @@ const BALL_AMOUNT = 3
 
 const STEPS_BETWEEN_SHIFT = 20
 
-
 var obstacle = preload("res://prefabs/obstacle.tscn")
 var label = preload("res://prefabs/hintLabel.tscn")
 var distanceCell = preload("res://prefabs/distancePreview.tscn")
@@ -39,6 +38,7 @@ var elementalPos : Vector2i
 var inventorySize : int = 5
 var dayTime = 0
 var tutrorialShown = false
+var isChoosingCell = false
 
 func _ready() -> void:
 	AudioManager.play("forest")
@@ -92,6 +92,8 @@ func openTile(pos : Vector2i):
 
 func chooseCellToAct(distance : int):
 	await get_tree().create_timer(0.01).timeout
+	UI.get_node("cursor").switchState(UI.get_node("cursor").sprites.AIM)
+	isChoosingCell = true
 	var availableArea : Array[Vector2]
 	for x in range(Global.player.gridPos.x - distance, Global.player.gridPos.x + distance + 1):
 		for y in range(Global.player.gridPos.y - distance, Global.player.gridPos.y + distance + 1):
@@ -106,6 +108,8 @@ func chooseCellToAct(distance : int):
 		cell = await cellSelected
 	for preview in $distancePreview.get_children():
 		preview.queue_free()
+	isChoosingCell = false
+	UI.get_node("cursor").switchState(UI.get_node("cursor").sprites.DEFAULT)
 	return Vector2i(cell)
 
 func getNeighboursSum(pos : Vector2i):

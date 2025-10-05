@@ -3,6 +3,7 @@ extends ItemAction
 class_name Shoot
 
 func act(source):
+	source.hideTooltip()
 	var bullets = UI.findItem("bullets")
 	if bullets == null || bullets.item.amount < source.item.usage:
 		return
