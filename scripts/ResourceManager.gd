@@ -10,6 +10,7 @@ static func loadFiles(path : String, withNames : bool = false):
 		push_error("Не удалось открыть %s" % path)
 		return
 	for file in dir.get_files():
+		print(file)
 		if file.ends_with(".remap"):
 			file = file.trim_suffix(".remap")
 		if file.ends_with(".tscn") || file.ends_with(".tres") || file.ends_with(".mp3") || file.ends_with(".wav"):
