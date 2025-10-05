@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgxfwabwllbqw"]
+
+[ext_resource type="Material" uid="uid://ck28uvpbtq17x" path="res://shaders/outline.tres" id="1_m6bgb"]
+[ext_resource type="Script" uid="uid://cafai8lmdg8ew" path="res://scripts/UI/pickUpIcon.gd" id="1_v64rb"]
+
+[node name="pickUpIcon" type="TextureRect"]
+material = ExtResource("1_m6bgb")
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_v64rb")

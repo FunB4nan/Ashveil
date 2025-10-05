@@ -96,6 +96,9 @@ func openTile(pos : Vector2i):
 	else:
 		return null
 
+func playAudio(title : String):
+	AudioManager.play(title)
+
 func throwProjectile(title, pos):
 	var projecttileInst = projectiles[title].instantiate()
 	projecttileInst.global_position = Global.player.position

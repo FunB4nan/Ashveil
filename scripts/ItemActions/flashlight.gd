@@ -3,6 +3,7 @@ extends ItemAction
 class_name Flashlight
 
 func act(source):
+	AudioManager.play("flashlight")
 	var playerPos = Global.player.gridPos
 	for x in range(playerPos.x - 1, playerPos.x + 2):
 		for y in range(playerPos.y - 1, playerPos.y + 2):

@@ -855,6 +855,12 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 386.0
+offset_top = 652.0
+offset_right = 426.0
+offset_bottom = 692.0
+
 [connection signal="pressed" from="retryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="continueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/music/musicSlider" to="." method="updateSettings"]

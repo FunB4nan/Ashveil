@@ -1,5 +1,7 @@
 extends TextureButton
 
+var pickUpIcon = preload("res://prefabs/UI/pickUpIcon.tscn")
+
 @export var item : Item
 var amount : int = 0
 var parent : Obstacle
@@ -21,6 +23,10 @@ func _ready() -> void:
 func addItem():
 	var willStack = UI.findItem(item.title) != null && item.canStack
 	if UI.getItemCount() < Global.main.inventorySize || willStack:
+		var iconInst = pickUpIcon.instantiate()
+		iconInst.texture = item.sprite
+		iconInst.position = UI.get_node("cursor").position
+		UI.add_child(iconInst)
 		AudioManager.play("pickup", false, true)
 		UI.addItem(item, amount)
 		parent.deleteItem(self)
