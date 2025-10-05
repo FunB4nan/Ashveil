@@ -16,7 +16,8 @@ func _ready() -> void:
 	pressed.connect(addItem)
 
 func addItem():
-	if UI.getItemCount() < Global.main.inventorySize:
+	var willStack = UI.findItem(item.title) != null && item.canStack
+	if UI.getItemCount() < Global.main.inventorySize || willStack:
 		AudioManager.play("pickup", false, true)
 		UI.addItem(item, amount)
 		parent.deleteItem(self)

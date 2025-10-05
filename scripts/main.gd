@@ -54,7 +54,6 @@ func _ready() -> void:
 	for i in range(-START_RADIUS, START_RADIUS + 1):
 		for j in range(-START_RADIUS, START_RADIUS + 1):
 			openTile(Vector2(i, j))
-	openTile(elementalPos)
 	Global.mapGenerated.emit()
 
 func moveDay():
@@ -189,6 +188,7 @@ func generateChunk(restrictedCells : Array[Vector2]):
 			if Vector2i(i, j) == elementalPos:
 				map[elementalPos] = 40
 				enemiesOnMap[elementalPos] = "elemental"
+				openTile(elementalPos)
 			elif Vector2(i, j) in mines:
 				map[Vector2i(i, j)] = 100
 				enemiesOnMap[Vector2i(i, j)] = "mine"
@@ -208,7 +208,7 @@ func generateChunk(restrictedCells : Array[Vector2]):
 				map[Vector2i(i, j)] = 0
 
 func randomizeObstaclePos(obstacles : Array[Vector2], restrictedCells : Array[Vector2]):
-	var pos : Vector2 = Vector2(randi_range(-CHUNK_SIZE / 2 - 1,CHUNK_SIZE / 2 - 1), randi_range(-CHUNK_SIZE / 2 - 1,CHUNK_SIZE / 2 - 1))
+	var pos : Vector2 = Vector2(randi_range(-CHUNK_SIZE / 2 + 1,CHUNK_SIZE / 2 - 1), randi_range(-CHUNK_SIZE / 2 + 1,CHUNK_SIZE / 2 - 1))
 	if pos in obstacles || pos in restrictedCells:
 		pos = randomizeObstaclePos(obstacles, restrictedCells)
 	return pos
