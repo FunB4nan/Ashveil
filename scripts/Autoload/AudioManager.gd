@@ -8,6 +8,7 @@ var currentMusic : String = ""
 func _ready() -> void:
 	musics = ResourceManager.loadFiles("res://audio/music/", true)
 	sounds = ResourceManager.loadFiles("res://audio/sounds/", true)
+	print(sounds)
 	for sound in sounds.keys():
 		var soundInst = AudioStreamPlayer.new()
 		soundInst.name = sound
