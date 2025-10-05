@@ -11,7 +11,7 @@ var player : Player
 
 var musicValume = 100
 var sfxValume = 100
-var crtOn = false
+var crtOn = true
 
 var rng = RandomNumberGenerator.new()
 

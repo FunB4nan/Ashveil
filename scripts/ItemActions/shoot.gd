@@ -13,4 +13,5 @@ func act(source):
 	if Global.main.map[cell] != 0:
 		Global.main.map[cell] = Global.main.map[cell] - source.item.damage
 		Global.main.cellEdited.emit(cell)
+	Global.main.openTile(cell)
 	bullets.subAmount(source.item.usage)

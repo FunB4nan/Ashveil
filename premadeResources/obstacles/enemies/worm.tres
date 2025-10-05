@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Enemy" load_steps=7 format=3 uid="uid://cia400b66vtb3"]
+[gd_resource type="Resource" script_class="Enemy" load_steps=8 format=3 uid="uid://cia400b66vtb3"]
 
 [ext_resource type="Script" uid="uid://pm8v0a1oee6h" path="res://scripts/Resources/item.gd" id="1_lepad"]
 [ext_resource type="Resource" uid="uid://nmb2f3jiicq" path="res://premadeResources/weapons/shotgun.tres" id="2_07ram"]
 [ext_resource type="Script" uid="uid://cc14oiwxat4rv" path="res://scripts/Resources/enemy.gd" id="2_wa3a3"]
 [ext_resource type="Resource" uid="uid://u2kbed02rq5n" path="res://premadeResources/items/bullets.tres" id="3_07ram"]
+[ext_resource type="Resource" uid="uid://mc82qcr6mgb4" path="res://premadeResources/items/cocktail.tres" id="4_gtnss"]
 [ext_resource type="Texture2D" uid="uid://bada7xnuy0ybl" path="res://sprites/concept.png" id="4_rb44l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gtnss"]
@@ -14,9 +15,9 @@ region = Rect2(512, 0, 32, 32)
 script = ExtResource("2_wa3a3")
 loot = Dictionary[ExtResource("1_lepad"), Array]({
 ExtResource("3_07ram"): [2, 8],
-ExtResource("2_07ram"): [0, 1]
+ExtResource("2_07ram"): [0, 1],
+ExtResource("4_gtnss"): [0, 1]
 })
-createdChest = false
 sprite = SubResource("AtlasTexture_gtnss")
 value = 10
 metadata/_custom_type_script = "uid://cc14oiwxat4rv"

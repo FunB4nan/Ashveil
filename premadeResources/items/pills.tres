@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Item" load_steps=9 format=3 uid="uid://bg3ebjvcjivs3"]
+
+[ext_resource type="Script" uid="uid://bwkwakxkym3lt" path="res://scripts/Resources/itemAction.gd" id="1_bn1he"]
+[ext_resource type="Script" uid="uid://bayyc1eepk3mo" path="res://scripts/ItemActions/throw.gd" id="2_852kw"]
+[ext_resource type="Script" uid="uid://tt2hwlujakgt" path="res://scripts/ItemActions/usePills.gd" id="2_v3efi"]
+[ext_resource type="Script" uid="uid://pm8v0a1oee6h" path="res://scripts/Resources/item.gd" id="3_v3efi"]
+[ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="4_kanwv"]
+
+[sub_resource type="Resource" id="Resource_kanwv"]
+script = ExtResource("2_v3efi")
+title = "Use"
+metadata/_custom_type_script = "uid://tt2hwlujakgt"
+
+[sub_resource type="Resource" id="Resource_nxlty"]
+script = ExtResource("2_852kw")
+title = "Drop"
+metadata/_custom_type_script = "uid://bayyc1eepk3mo"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fj4wq"]
+atlas = ExtResource("4_kanwv")
+region = Rect2(103, 37, 22, 24)
+
+[resource]
+script = ExtResource("3_v3efi")
+sprite = SubResource("AtlasTexture_fj4wq")
+title = "pills"
+buttons = Array[ExtResource("1_bn1he")]([SubResource("Resource_kanwv"), SubResource("Resource_nxlty")])
+initialEffects = Array[ExtResource("1_bn1he")]([])
+amount = 1
+canStack = true
+metadata/_custom_type_script = "uid://pm8v0a1oee6h"

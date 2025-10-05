@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Item" load_steps=9 format=3 uid="uid://sqtxtiio8l0d"]
+
+[ext_resource type="Script" uid="uid://bwkwakxkym3lt" path="res://scripts/Resources/itemAction.gd" id="1_qfmju"]
+[ext_resource type="Script" uid="uid://pm8v0a1oee6h" path="res://scripts/Resources/item.gd" id="2_kiyww"]
+[ext_resource type="Script" uid="uid://bayyc1eepk3mo" path="res://scripts/ItemActions/throw.gd" id="2_l8bmr"]
+[ext_resource type="Script" uid="uid://bfjlwhxkvvmmn" path="res://scripts/ItemActions/flashlight.gd" id="2_r6s48"]
+[ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="4_r6s48"]
+
+[sub_resource type="Resource" id="Resource_xqw0g"]
+script = ExtResource("2_r6s48")
+title = "Use"
+metadata/_custom_type_script = "uid://bfjlwhxkvvmmn"
+
+[sub_resource type="Resource" id="Resource_mifmg"]
+script = ExtResource("2_l8bmr")
+title = "Drop"
+metadata/_custom_type_script = "uid://bayyc1eepk3mo"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqw0g"]
+atlas = ExtResource("4_r6s48")
+region = Rect2(128, 30, 33, 35)
+
+[resource]
+script = ExtResource("2_kiyww")
+sprite = SubResource("AtlasTexture_xqw0g")
+title = "flashlight"
+buttons = Array[ExtResource("1_qfmju")]([SubResource("Resource_xqw0g"), SubResource("Resource_mifmg")])
+initialEffects = Array[ExtResource("1_qfmju")]([])
+amount = 1
+canStack = true
+metadata/_custom_type_script = "uid://pm8v0a1oee6h"

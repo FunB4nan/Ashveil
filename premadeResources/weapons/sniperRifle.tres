@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://drubykjtg7xrf"
 
 [sub_resource type="Resource" id="Resource_fkjb4"]
 script = ExtResource("2_fkjb4")
-title = "Throw"
+title = "Drop"
 metadata/_custom_type_script = "uid://bayyc1eepk3mo"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5sjhe"]
@@ -22,7 +22,7 @@ region = Rect2(416, 0, 32, 32)
 
 [resource]
 script = ExtResource("2_1sp6h")
-damage = 5
+damage = 10
 distance = 3
 usage = 1
 modules = Array[String]([])

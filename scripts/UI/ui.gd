@@ -77,7 +77,7 @@ func hideAllTooltips(source):
 
 func addItem(item : Item, amount = 0):
 	for slot in %inventory.get_children():
-		if slot.item.title == item.title:
+		if slot.item.title == item.title && item.canStack:
 			slot.item.amount += amount
 			slot.update()
 			return
@@ -147,3 +147,8 @@ func _on_close_tutor_pressed() -> void:
 	$tutorial.visible = false
 	if %tutorTitle.text == tr("sumTutor"):
 		showTutorial("checkTutor")
+
+
+func _on_continue_button_pressed() -> void:
+	AudioManager.play("forest")
+	$anim.play_backwards("win")

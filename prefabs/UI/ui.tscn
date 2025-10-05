@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dsprud7eke4hw"]
+[gd_scene load_steps=33 format=3 uid="uid://dsprud7eke4hw"]
 
 [ext_resource type="Script" uid="uid://bd8c0yj7jndi" path="res://scripts/UI/ui.gd" id="1_kh8tx"]
 [ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="2_2oqpd"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://cxr1naborcw8u" path="res://sprites/sumTutor.png" id="6_j3q48"]
 [ext_resource type="Texture2D" uid="uid://cmxn8lhm5m5dw" path="res://sprites/concept3.png" id="7_j3q48"]
 [ext_resource type="Script" uid="uid://dkujwdr3l0530" path="res://scripts/UI/cursor.gd" id="8_m8ghc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8ghc"]
+atlas = ExtResource("2_2oqpd")
+region = Rect2(590, 44, 78, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hteqg"]
 atlas = ExtResource("2_2oqpd")
@@ -23,14 +27,6 @@ region = Rect2(256, 0, 32, 32)
 resource_local_to_scene = true
 atlas = ExtResource("2_2oqpd")
 region = Rect2(192, 0, 32, 32)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wj31q"]
-shader = ExtResource("2_daqmn")
-shader_parameter/crt_brightness = 2.0
-shader_parameter/crt_ghost = 0.0
-shader_parameter/crt_grid = 0.348
-shader_parameter/crt_white_noise = 0.0
-shader_parameter/crt_curve = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m8ghc"]
 shader = ExtResource("5_j3q48")
@@ -91,6 +87,14 @@ _data = {
 &"idle": SubResource("Animation_skpy0")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wj31q"]
+shader = ExtResource("2_daqmn")
+shader_parameter/crt_brightness = 2.0
+shader_parameter/crt_ghost = 0.0
+shader_parameter/crt_grid = 0.348
+shader_parameter/crt_white_noise = 0.0
+shader_parameter/crt_curve = 0.01
+
 [sub_resource type="Animation" id="Animation_wj31q"]
 length = 0.001
 tracks/0/type = "value"
@@ -139,7 +143,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -164,6 +168,30 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("continueButton:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(551, 769)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("winLabel:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, -93)]
 }
 
 [sub_resource type="Animation" id="Animation_daqmn"]
@@ -241,10 +269,10 @@ tracks/0/path = NodePath("itemTutor/arrow:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -271,13 +299,42 @@ tracks/2/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_2fm38"]
+resource_name = "win"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("continueButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(551, 769), Vector2(551, 400)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("winLabel:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(10, -93), Vector2(10, 250)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hteqg"]
 _data = {
 &"RESET": SubResource("Animation_wj31q"),
 &"gameOver": SubResource("Animation_daqmn"),
 &"hideTutorial": SubResource("Animation_2oqpd"),
 &"pointOnItem": SubResource("Animation_fhwqs"),
-&"showTutorial": SubResource("Animation_6yajo")
+&"showTutorial": SubResource("Animation_6yajo"),
+&"win": SubResource("Animation_2fm38")
 }
 
 [sub_resource type="Animation" id="Animation_ww18o"]
@@ -373,6 +430,90 @@ theme_override_font_sizes/font_size = 36
 text = "W
 A S D"
 horizontal_alignment = 1
+
+[node name="gameOverLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = -93.0
+offset_right = 1270.0
+offset_bottom = -29.0
+theme_override_colors/font_color = Color(0.819608, 0.266667, 0.266667, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 64
+text = "game_over"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="gameOverLabel"]
+modulate = Color(1, 1, 1, 0.592157)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 351.0
+offset_top = 13.0
+offset_right = -283.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_m8ghc")
+
+[node name="winLabel" type="Label" parent="."]
+offset_left = 10.0
+offset_top = -93.0
+offset_right = 1270.0
+offset_bottom = -29.0
+theme_override_colors/font_color = Color(0.819608, 0.266667, 0.266667, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 64
+text = "win"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="winLabel"]
+modulate = Color(1, 1, 1, 0.592157)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 351.0
+offset_top = 13.0
+offset_right = -283.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_m8ghc")
+
+[node name="retryButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = 409.0
+offset_right = 73.0
+offset_bottom = 465.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "retry"
+
+[node name="continueButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -89.0
+offset_top = 409.0
+offset_right = 107.0
+offset_bottom = 465.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "continue"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -561,27 +702,6 @@ size_flags_vertical = 4
 focus_mode = 0
 text = "Settings"
 
-[node name="gameOverLabel" type="Label" parent="."]
-offset_left = 10.0
-offset_top = -93.0
-offset_right = 1270.0
-offset_bottom = -29.0
-theme_override_colors/font_color = Color(0.819608, 0.266667, 0.266667, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 64
-text = "Game Over!"
-horizontal_alignment = 1
-
-[node name="crt" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_wj31q")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
 [node name="itemTutor" type="Label" parent="."]
 visible = false
 offset_left = 429.0
@@ -594,13 +714,14 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="arrow" type="TextureRect" parent="itemTutor"]
+visible = false
 material = SubResource("ShaderMaterial_m8ghc")
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-offset_left = 163.0
-offset_top = 23.8858
-offset_right = 227.0
-offset_bottom = 87.8858
+offset_left = 604.0
+offset_top = 563.0
+offset_right = 668.0
+offset_bottom = 627.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_ww18o")
@@ -617,22 +738,6 @@ offset_top = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AtlasTexture_j3q48")
-
-[node name="retryButton" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -55.0
-offset_top = 409.0
-offset_right = 73.0
-offset_bottom = 465.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 48
-text = "retry"
 
 [node name="tutorial" type="PanelContainer" parent="."]
 visible = false
@@ -699,6 +804,17 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="crt" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_wj31q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_hteqg")
@@ -710,6 +826,8 @@ libraries = {
 }
 autoplay = "idle"
 
+[connection signal="pressed" from="retryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="continueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/music/musicSlider" to="." method="updateSettings"]
 [connection signal="value_changed" from="MarginContainer/settings/MarginContainer/VBoxContainer/sound/sfxSlider" to="." method="updateSettings"]
 [connection signal="pressed" from="MarginContainer/settings/MarginContainer/VBoxContainer/language/previousLanguage" to="." method="_on_previous_language_pressed"]
@@ -717,5 +835,4 @@ autoplay = "idle"
 [connection signal="toggled" from="MarginContainer/settings/MarginContainer/VBoxContainer/HBoxContainer/crt" to="." method="updateSettings"]
 [connection signal="pressed" from="MarginContainer/settings/MarginContainer/closeSettings" to="." method="_on_close_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/playerStats/HBoxContainer/settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="retryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="tutorial/VBoxContainer/closeTutor" to="." method="_on_close_tutor_pressed"]

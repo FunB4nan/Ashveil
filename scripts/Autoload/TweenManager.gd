@@ -6,9 +6,12 @@ func scaleTween(node, newValue : Vector2, time : float = 0.1):
 	tween.play()
 	await tween.finished
 
-func moveTween(node, newValue : Vector2, time : float = 0.1):
+func moveTween(node, newValue : Vector2, time : float = 0.1, defaultTween = false):
 	var tween = create_tween().bind_node(node)
-	tween.tween_property(node, "position", newValue, time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	if defaultTween:
+		tween.tween_property(node, "position", newValue, time)
+	else:
+		tween.tween_property(node, "position", newValue, time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.play()
 	await tween.finished
 

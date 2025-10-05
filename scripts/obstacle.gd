@@ -69,7 +69,7 @@ func deleteItem(item):
 		queue_free()
 
 func showPanel():
-	$lootPanel.visible = true
+	$lootPanel.visible = gridPos == Global.player.gridPos
 
 func hidePanel():
-	$lootPanel.visible = false
+	$lootPanel.visible = gridPos != Global.player.gridPos

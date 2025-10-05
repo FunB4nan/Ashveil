@@ -9,11 +9,11 @@ signal cellSelected
 const START_RADIUS = 3
 const CHUNK_SIZE = 24
 
-const MINE_AMOUNT = 24
-const MUSHROOM_AMOUNT = 15
-const SLIME_AMOUNT = 10
-const WORM_AMOUNT = 8
-const BALL_AMOUNT = 3
+const MINE_AMOUNT = 30
+const MUSHROOM_AMOUNT = 20
+const SLIME_AMOUNT = 20
+const WORM_AMOUNT = 15
+const BALL_AMOUNT = 10
 
 const STEPS_BETWEEN_SHIFT = 20
 
@@ -28,6 +28,9 @@ var enemies = {
 	"ball" : preload("res://premadeResources/obstacles/enemies/ball.tres"),
 	"mine" : preload("res://premadeResources/obstacles/mine.tres"),
 	"elemental" : preload("res://premadeResources/obstacles/enemies/elemental.tres")
+}
+var projectiles = {
+	"cocktail" : preload("res://prefabs/projectiles/cocktail.tscn")
 }
 
 var map : Dictionary[Vector2i, int]
@@ -90,8 +93,16 @@ func openTile(pos : Vector2i):
 	else:
 		return null
 
+func throwProjectile(title, pos):
+	var projecttileInst = projectiles[title].instantiate()
+	projecttileInst.global_position = Global.player.position
+	add_child(projecttileInst)
+	await TweenManager.moveTween(projecttileInst, pos * 32, 0.5, true)
+	projecttileInst.queue_free()
+
 func chooseCellToAct(distance : int):
-	await get_tree().create_timer(0.01).timeout
+	print("is aiming", distance)
+	await get_tree().create_timer(0.1).timeout
 	UI.get_node("cursor").switchState(UI.get_node("cursor").sprites.AIM)
 	isChoosingCell = true
 	var availableArea : Array[Vector2]
@@ -103,7 +114,8 @@ func chooseCellToAct(distance : int):
 			previewInst.scale = Vector2.ZERO
 			$distancePreview.add_child(previewInst)
 			TweenManager.scaleTween(previewInst, Vector2.ONE)
-	var cell = Vector2.ZERO
+	print("area shown")
+	var cell = Vector2(80, 80)
 	while !(cell in availableArea):
 		cell = await cellSelected
 	for preview in $distancePreview.get_children():
@@ -132,6 +144,9 @@ func createEnemy(title : String, pos : Vector2i):
 func createChest(pos : Vector2i, loot : Dictionary[Item, Array]):
 	if pos in chests:
 		return
+	if enemiesOnMap[pos] == "elemental":
+		AudioManager.play("win")
+		UI.playAnimation("win")
 	var chestInst = obstacle.instantiate()
 	chestInst.gridPos = pos
 	chestInst.info = load("res://premadeResources/obstacles/chest.tres")

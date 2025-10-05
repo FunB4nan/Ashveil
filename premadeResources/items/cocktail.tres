@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="Item" load_steps=9 format=3 uid="uid://mc82qcr6mgb4"]
+
+[ext_resource type="Script" uid="uid://bwkwakxkym3lt" path="res://scripts/Resources/itemAction.gd" id="1_ia3jm"]
+[ext_resource type="Script" uid="uid://bayyc1eepk3mo" path="res://scripts/ItemActions/throw.gd" id="2_au6gr"]
+[ext_resource type="Script" uid="uid://cr3cdiefsmumo" path="res://scripts/ItemActions/throwCocktail.gd" id="2_drffo"]
+[ext_resource type="Script" uid="uid://pm8v0a1oee6h" path="res://scripts/Resources/item.gd" id="3_drffo"]
+[ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="5_au6gr"]
+
+[sub_resource type="Resource" id="Resource_au6gr"]
+script = ExtResource("2_drffo")
+title = "Throw"
+metadata/_custom_type_script = "uid://cr3cdiefsmumo"
+
+[sub_resource type="Resource" id="Resource_7nj6o"]
+script = ExtResource("2_au6gr")
+title = "Drop"
+metadata/_custom_type_script = "uid://bayyc1eepk3mo"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drffo"]
+atlas = ExtResource("5_au6gr")
+region = Rect2(67, 33, 31, 30)
+
+[resource]
+script = ExtResource("3_drffo")
+sprite = SubResource("AtlasTexture_drffo")
+title = "molotovCocktail"
+buttons = Array[ExtResource("1_ia3jm")]([SubResource("Resource_au6gr"), SubResource("Resource_7nj6o")])
+initialEffects = Array[ExtResource("1_ia3jm")]([])
+amount = 1
+canStack = true
+metadata/_custom_type_script = "uid://pm8v0a1oee6h"

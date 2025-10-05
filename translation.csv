@@ -12,3 +12,10 @@ checkTutorDesc,"But if your health is lower, you will lose.","Но если тв
 close_button,Close,Закрыть
 Move,Move,Ходить
 clickItem,Click on slot to see details,Кликни на слот чтобы узнать детали
+game_over,Game Over!,Конец игры!
+retry,Retry,Заново
+bullets,Bullets,Пули
+pistol,Pistol,Пистолет
+shotgun,Shotgun,Дробовик
+sniperRifle,Sniper Rifle,Винтовка
+uzi,Uzi,Узи

@@ -19,7 +19,7 @@ func _ready() -> void:
 	isMoving = false
 
 func _input(event: InputEvent) -> void:
-	if isMoving || UI.get_node("tutorial").visible || Global.main.isChoosingCell:
+	if isMoving || UI.get_node("tutorial").visible || Global.main.isChoosingCell || AudioManager.currentMusic == "win":
 		return
 	if event.is_action_pressed("ui_right"):
 		move(Vector2i(1, 0))
@@ -38,19 +38,25 @@ func move(vector : Vector2i):
 	var danger = await Global.main.openTile(gridPos + vector)
 	AudioManager.play("step", true, true)
 	if danger != null:
+		var armor = UI.findItem("armor")
+		var def = 0
+		if armor != null:
+			def += 10
 		gridPos += vector
 		Global.main.moveDay()
 		await TweenManager.moveTween(self, global_position + Vector2(vector) * 32, 0.4)
-		if danger > hp:
+		if danger > hp + def:
 			kill()
 			return
 		else:
-			hp -= danger
 			Global.main.map[gridPos] -= danger
 			Global.main.cellEdited.emit(gridPos)
-			UI.updateUI()
-			print(hp)
 			if danger > 0:
+				if def != 0:
+					armor.subAmount(1)
+				if danger - def > 0:
+					hp -= danger - def
+					UI.updateUI()
 				gridPos -= vector
 				await TweenManager.moveTween(self, global_position - Vector2(vector) * 32, 0.4)
 				Global.main.openTile(gridPos + vector)

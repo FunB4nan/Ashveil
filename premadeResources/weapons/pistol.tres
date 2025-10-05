@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://drubykjtg7xrf"
 
 [sub_resource type="Resource" id="Resource_woek8"]
 script = ExtResource("2_r5rif")
-title = "Throw"
+title = "Drop"
 metadata/_custom_type_script = "uid://bayyc1eepk3mo"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5rif"]
@@ -22,7 +22,7 @@ region = Rect2(320, 0, 32, 32)
 
 [resource]
 script = ExtResource("1_ocara")
-damage = 1
+damage = 3
 distance = 1
 usage = 1
 modules = Array[String]([])

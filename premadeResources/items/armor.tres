@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Item" load_steps=7 format=3 uid="uid://buyv3l6ouvysp"]
+
+[ext_resource type="Script" uid="uid://bwkwakxkym3lt" path="res://scripts/Resources/itemAction.gd" id="1_qsn28"]
+[ext_resource type="Script" uid="uid://bayyc1eepk3mo" path="res://scripts/ItemActions/throw.gd" id="2_3r4dv"]
+[ext_resource type="Script" uid="uid://pm8v0a1oee6h" path="res://scripts/Resources/item.gd" id="2_it6x5"]
+[ext_resource type="Texture2D" uid="uid://cj5txcq8kdnhl" path="res://sprites/concept1.png" id="4_m2u37"]
+
+[sub_resource type="Resource" id="Resource_4m561"]
+script = ExtResource("2_3r4dv")
+title = "Drop"
+metadata/_custom_type_script = "uid://bayyc1eepk3mo"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skwlf"]
+atlas = ExtResource("4_m2u37")
+region = Rect2(36, 33, 29, 29)
+
+[resource]
+script = ExtResource("2_it6x5")
+sprite = SubResource("AtlasTexture_skwlf")
+title = "armor"
+buttons = Array[ExtResource("1_qsn28")]([SubResource("Resource_4m561")])
+initialEffects = Array[ExtResource("1_qsn28")]([])
+amount = 1
+canStack = false
+metadata/_custom_type_script = "uid://pm8v0a1oee6h"
